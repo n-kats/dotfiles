@@ -152,4 +152,3 @@ inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 if $GOROOT != ''
   set rtp += $GOROOT/misc/vim
 endif
-
