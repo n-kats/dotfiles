@@ -67,11 +67,20 @@ eval "$(anyenv init -)"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### VIM
-## IF MAC
+
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
 ###
-export DYLD_LIBRARY_PATH="/usr/local/opt/cairo/lib"
+
+### python
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/dev
+source `which virtualenvwrapper.sh`
+export PYLEARN2_DATA_PATH=~/data/pylean2
+export PYLEARN2_VIEWER_COMMAND="open -Wn"
+# pylearnのチュートリアル用
+export PATH=~/git/pylearn2/pylearn2/script:$PATH
+
 
 ### go
 export GOPATH=$HOME/Documents/go/third-party:$HOME/Documents/go/my-project
