@@ -19,12 +19,12 @@ setopt prompt_subst
 # プロンプト指定
 PROMPT="
 [%n] %{${fg[yellow]}%}%~%{${reset_color}%}
-%(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
+%(?.%{$fg[green]%}.%{$fg[white]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
 # プロンプト指定（コマンドの続き）
 PROMPT2='[%n]> '
 
 # プロンプト指定（もしかして）
-SPROMPT="%{$fg[red]%}%{$suggest%}(*'~'%)? < もしかして %B%r%b %{$fg[red]%}かな？ [そう！(y), 違う！(n), a, e]:${reset_color} "
+SPROMPT="%{$fg[cyan]%}%{$suggest%}(*'~'%)? < もしかして %B%r%b %{$fg[cyan]%}かな？ [そう！(y), 違う！(n), a, e]:${reset_color} "
 
 ############################
 HISTFILE=~/.zsh_history
