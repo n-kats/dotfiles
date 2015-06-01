@@ -1,15 +1,38 @@
 # Created by newuser for 5.0.7
 export LANG=ja_JP.UTF-8
 
+# 色
 autoload -Uz colors
 colors
 
+
+############################
+### かわいくなる
+# もしかして機能
+setopt correct
+
+# PCRE互換の正規表現
+setopt re_match_pcre
+
+# プロンプト文字列の評価・置換
+setopt prompt_subst
+# プロンプト指定
+PROMPT="
+[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
+%(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
+# プロンプト指定（コマンドの続き）
+PROMPT2='[%n]> '
+
+# プロンプト指定（もしかして）
+SPROMPT="%{$fg[red]%}%{$suggest%}(*'~'%)? < もしかして %B%r%b %{$fg[red]%}かな？ [そう！(y), 違う！(n), a, e]:${reset_color} "
+
+############################
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-PROMPT="%{${fg[red]}%}[%n@%m]%{${reset_color}%} %~
-%# "
+# PROMPT="%{${fg[red]}%}[%n@%m]%{${reset_color}%} %~
+# %# "
 
 ############################
 
