@@ -66,22 +66,26 @@ eval "$(anyenv init -)"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-### VIM
+### FIXME
+case %{OSTYPE} in
+  darwin*)
+    ### VIM
+    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+    alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
+    ###
 
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
-###
-
-### python
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/dev
-source `which virtualenvwrapper.sh`
-export PYLEARN2_DATA_PATH=~/data/pylean2
-export PYLEARN2_VIEWER_COMMAND="open -Wn"
-# pylearnのチュートリアル用
-export PATH=~/git/pylearn2/pylearn2/script:$PATH
+    ### python
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/dev
+    source `which virtualenvwrapper.sh`
+    export PYLEARN2_DATA_PATH=~/data/pylean2
+    export PYLEARN2_VIEWER_COMMAND="open -Wn"
+    # pylearnのチュートリアル用
+    export PATH=~/git/pylearn2/pylearn2/script:$PATH
 
 
-### go
-export GOPATH=$HOME/Documents/go/third-party:$HOME/Documents/go/my-project
-export PATH="$HOME/Documents/go/third-party/bin:$HOME/Documents/go/my-project/bin:$PATH"
+    ### go
+    export GOPATH=$HOME/Documents/go/third-party:$HOME/Documents/go/my-project
+    export PATH="$HOME/Documents/go/third-party/bin:$HOME/Documents/go/my-project/bin:$PATH"
+
+esac

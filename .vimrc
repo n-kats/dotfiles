@@ -64,9 +64,9 @@ NeoBundleCheck
 
 
 set autoindent	"新しい行のインデントを現在行と同じにする
-set backupdir='~/Documents/vim/backup'
+set backupdir=$HOME/Documents/vim/backup
 ""バックアップファイルを作るディレクトリ
-set directory='~/Documents/vim/swap'
+set directory=$HOME/Documents/vim/swap
 ""スワップファイル用のディレクトリ
 set clipboard=unnamed	"クリップボードを連携
 set number
