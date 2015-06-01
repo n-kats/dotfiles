@@ -17,8 +17,7 @@ setopt re_match_pcre
 # プロンプト文字列の評価・置換
 setopt prompt_subst
 # プロンプト指定
-PROMPT="
-[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
+PROMPT="[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
 %(?.%{$fg[green]%}.%{$fg[white]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
 # プロンプト指定（コマンドの続き）
 PROMPT2='[%n]> '
