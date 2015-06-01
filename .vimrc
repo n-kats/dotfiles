@@ -16,7 +16,15 @@ NeoBundle 'Shougo/unite.vim'
 
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 NeoBundle 'Shougo/vimshell'
 
 "NeoBundle 'Townk/vim-autoclose'
@@ -28,7 +36,6 @@ NeoBundle 'slim-template/vim-slim'
 "NeoBundle 'tyru/eskk.vim'
 "NeoBundle 'fuenor/im_control.vim'
 "NeoBundle 'Shougo/neocomplcache.vim'
-"NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-endwise'
 "NeoBundle 'alpaca-tc/alpaca_tags'
@@ -45,6 +52,8 @@ NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'editorconfig/editorconfig-vim'
+
+NeoBundle 'nvie/vim-flake8'
 """
 
 call neobundle#end()
@@ -55,9 +64,9 @@ NeoBundleCheck
 
 
 set autoindent	"新しい行のインデントを現在行と同じにする
-set backupdir=~/Documents/vim/backup
+set backupdir='~/Documents/vim/backup'
 ""バックアップファイルを作るディレクトリ
-set directory=~/Documents/vim/swap
+set directory='~/Documents/vim/swap'
 ""スワップファイル用のディレクトリ
 set clipboard=unnamed	"クリップボードを連携
 set number
@@ -112,26 +121,64 @@ autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 ""makeでコンパイル
 """"""""""""""vim-latex"""""""""""""""""""""""""""""""""""""""
 if expand("%:e") == "tex"
-  filetype plugin on
-  filetype indent on
-  set shellslash
-  set grepprg=grep\ -nH\ $*
-  let g:tex_flavor='latex'
-  let g:lamp_UsePlaceHolders = 1
-  let g:lamp_DeleteEmptyPlaceHolders = 1
-  let g:lamp_StickyPlaceHolders = 0
-  let g:Tex_DefaultTargetFormat = 'pdf'
-  let g:Tex_MultipleCompileFormats = 'dvi,pdf'
-  let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-  let g:Tex_FormatDependency_ps = 'dvi,ps'
+  if has('win32')
+    let ostype = "Win"
+  elseif has('mac')
+    filetype plugin on
+    filetype indent on
+    set shellslash
+    set grepprg=grep\ -nH\ $*
+    let g:tex_flavor='latex'
+    let g:lamp_UsePlaceHolders = 1
+    let g:lamp_DeleteEmptyPlaceHolders = 1
+    let g:lamp_StickyPlaceHolders = 0
+    let g:Tex_DefaultTargetFormat = 'pdf'
+    let g:Tex_MultipleCompileFormats = 'dvi,pdf'
+    let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+    let g:Tex_FormatDependency_ps = 'dvi,ps'
 
-  let g:Tex_CompileRule_pdf = '/usr/texbin/ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
-  let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-  let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-  let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
-  let g:Tex_NakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
-  let g:Tex_UseEditorSettingInDVIViewer = 1
-  let g:Tex_ViewRule_pdf = '/usr/bin/open'
+    let g:Tex_CompileRule_pdf = '/usr/texbin/ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
+    let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+    let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+    let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
+    let g:Tex_NakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
+    let g:Tex_UseEditorSettingInDVIViewer = 1
+    let g:Tex_ViewRule_pdf = '/usr/bin/open'
+  else
+    filetype plugin on
+    filetype indent on
+    "set shellslash		""削ったけど大丈夫かな？
+    set grepprg=grep\ -nH\ $*
+
+    let g:tex_flavor='latex'
+    let g:Imap_UsePlaceHolders = 1
+    let g:Imap_DeleteEmptyPlaceHolders = 1
+    let g:Imap_StickyPlaceHolders = 0
+    let g:Tex_DefaultTargetFormat = 'pdf'
+    let g:Tex_FormatDependency_ps = 'dvi,ps'
+    let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+
+    let g:Tex_CompileRule_pdf = 'ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
+    "let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+    "let g:Tex_CompileRule_pdf = 'lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+    "let g:Tex_CompileRule_pdf = 'luajitlatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+    "let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+    "let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
+    let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
+    let g:Tex_CompileRule_dvi = 'uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+    let g:Tex_BibtexFlavor = 'upbibtex'
+    let g:Tex_MakeIndexFlavor = 'upmendex $*.idx'
+    let g:Tex_UseEditorSettingInDVIViewer = 1
+    let g:Tex_ViewRule_pdf = 'xdg-open'
+
+    "let g:Tex_CompileRule_dvi = 'platex -kanji=sjis -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
+    "let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
+    "let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+    "let g:Tex_BibtexFlavor = 'pbibtex -kanji=sjis'
+    "let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'
+
+    set noshellslash
+  endif
 endif
 
 """"""""""""""""""""""""""""""
