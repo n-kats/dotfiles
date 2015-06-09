@@ -1,6 +1,5 @@
 # Created by newuser for 5.0.7
 export LANG=ja_JP.UTF-8
-
 # 色
 autoload -Uz colors
 colors
@@ -111,3 +110,4 @@ case %{OSTYPE} in
     export PATH="$HOME/Documents/go/third-party/bin:$HOME/Documents/go/my-project/bin:$PATH"
 
 esac
+export LD_LIBRARY_PATH="/usr/local/lib"

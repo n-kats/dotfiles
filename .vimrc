@@ -182,6 +182,7 @@ if expand("%:e") == "tex"
 endif
 
 """"""""""""""""""""""""""""""
+set laststatus=2
 set list
 set listchars=tab:>.,eol:↲,extends:>,precedes:<,nbsp:%
 set cursorline
