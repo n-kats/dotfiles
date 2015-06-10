@@ -71,7 +71,7 @@ setopt print_eight_bit
 setopt no_beep
 setopt no_flow_control
 setopt interactive_comments
-setopt auto_cd
+##setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt share_history
@@ -79,6 +79,7 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt extended_glob
+function history-all { history -E 1 }
 
 ############################
 export PATH="$HOME/.anyenv/bin:$PATH"
@@ -88,7 +89,7 @@ eval "$(anyenv init -)"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### FIXME
-case %{OSTYPE} in
+case ${OSTYPE} in
   darwin*)
     ### VIM
     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
@@ -108,6 +109,7 @@ case %{OSTYPE} in
     ### go
     export GOPATH=$HOME/Documents/go/third-party:$HOME/Documents/go/my-project
     export PATH="$HOME/Documents/go/third-party/bin:$HOME/Documents/go/my-project/bin:$PATH"
-
+  ;;
 esac
+
 export LD_LIBRARY_PATH="/usr/local/lib"
