@@ -40,18 +40,21 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-endwise'
 "NeoBundle 'alpaca-tc/alpaca_tags'
 
+NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'jason0x43/vim-js-indent'
+NeoBundle 'mxw/vim-jsx'
 ""NeoBundle 'claco/jasmine.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+""NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'mtscout6/vim-cjsx'
+NeoBundle 'majutsushi/tagbar'
 ""NeoBundle 'vim-scripts/ruby-matchit'
 ""NeoBundle 'tomtom/tcomment_vim'
 "
 NeoBundle 'derekwyatt/vim-scala'
 
 NeoBundle 'fatih/vim-go'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mtscout6/vim-cjsx'
 
 NeoBundle 'editorconfig/editorconfig-vim'
 
@@ -190,4 +193,5 @@ endif
 
 """vimfiler
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
-
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
