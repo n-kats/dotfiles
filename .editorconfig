@@ -14,8 +14,8 @@ trim_trailing_whitespace = true
 insert_final_newline = false
 trim_trailing_whitespace = false
 
-[*.py,*.cpp]
+[*.{py,cpp,ts,cc}]
 indent_style = tab
-tab_witdh = 4
+indent_size = 4
 
 

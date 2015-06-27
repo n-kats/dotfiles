@@ -43,7 +43,7 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'jason0x43/vim-js-indent'
 ""NeoBundle 'claco/jasmine.vim'
-""NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 ""NeoBundle 'vim-scripts/ruby-matchit'
 ""NeoBundle 'tomtom/tcomment_vim'
 "
@@ -51,6 +51,8 @@ NeoBundle 'derekwyatt/vim-scala'
 
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'mtscout6/vim-cjsx'
+
 NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundle 'nvie/vim-flake8'
@@ -62,7 +64,7 @@ NeoBundleCheck
 
 """common""""""""""""""""""""""""""""""""
 
-
+set notitle "「Vimを使ってくれてありがとう」を消す
 set autoindent	"新しい行のインデントを現在行と同じにする
 set backupdir=$HOME/Documents/vim/backup
 ""バックアップファイルを作るディレクトリ
@@ -74,16 +76,6 @@ set wildmenu 	" コマンドライン補完を便利に
 set mouse=a 	" 全モードでマウスを有効化
 set showmatch	" 括弧の対応をハイライト
 set smarttab
-
-if expand("%:e") == "rb" || expand("%:e") == "erb" || expand("%:e") == "haml" || expand("%:e") == "slim" || expand("%:e") == "yml" || expand("%:e") == "jade" || expand("%:e") == "js"
-  set tabstop=2
-  set shiftwidth=2
-  set expandtab
-else
-  set tabstop=4	" タブを表示するときの幅
-  set shiftwidth=4	" タブを挿入するときの幅
-  set noexpandtab	" タブをタブとして扱う(スペースに展開しない)
-endif
 
 """""""""""""""""""""""""""""""""
 "neocomplcache
@@ -100,8 +92,9 @@ let g:quickrun_config={'*': {'split': ''}}
 set splitright
 let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
 
+"cjsxでcoffeeを処理する
 let g:quickrun_config['coffee'] = {
-      \'command' : 'coffee',
+      \'command' : 'cjsx',
       \'exec' : ['%c -cbp %s']
       \}
 
@@ -113,12 +106,6 @@ let g:quickrun_config['coffee'] = {
 """"""""""""""""netrwの文句"""""""""""""""""""""
 let g:netrw_localcopycmd=''
 
-"""coffeescript
-au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
-autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
-
-"使い方
-""makeでコンパイル
 """"""""""""""vim-latex"""""""""""""""""""""""""""""""""""""""
 if expand("%:e") == "tex"
   if has('win32')
@@ -200,3 +187,7 @@ inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 if $GOROOT != ''
   set rtp += $GOROOT/misc/vim
 endif
+
+"""vimfiler
+nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
+

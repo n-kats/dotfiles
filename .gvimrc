@@ -1,5 +1,5 @@
 colorscheme desert
-
+"let g:indent_guides_start_level = 2
 gui
 "set transparency=200	"半透明220が標準説
 "
