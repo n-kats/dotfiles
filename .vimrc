@@ -95,6 +95,10 @@ let g:quickrun_config={'*': {'split': ''}}
 set splitright
 let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
 
+let g:quickrun_config['cpp'] = {
+      \'command' : 'clang++',
+      \'cmdopt' : '-std=c++14',
+      \}
 "cjsxでcoffeeを処理する
 let g:quickrun_config['coffee'] = {
       \'command' : 'cjsx',
