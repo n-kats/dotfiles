@@ -110,6 +110,12 @@ case ${OSTYPE} in
     export GOPATH=$HOME/Documents/go/third-party:$HOME/Documents/go/my-project
     export PATH="$HOME/Documents/go/third-party/bin:$HOME/Documents/go/my-project/bin:$PATH"
   ;;
+  linux*)
+    ### go
+    export GOPATH=$HOME/.go
+    export PATH="$GOPATH/bin:$PATH"
+
+  ;;
 esac
 
 export LD_LIBRARY_PATH="/usr/local/lib"
