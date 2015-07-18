@@ -14,8 +14,8 @@ if has('multi_byte_ime') || has('gui_macvim')
 endif
 
 if has('win32') || has('mac')
-  set guifont=Ricty\ Discord:h12
-  set guifontwide=Ricty\ Discord:h12
+  set guifont=Ricty\ Discord:h16
+  set guifontwide=Ricty\ Discord:h16
 else
   set guifont=Ricty\ Discord\ 12
   set guifontwide=Ricty\ Discord\ 12

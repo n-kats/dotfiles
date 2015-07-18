@@ -113,6 +113,9 @@ let g:quickrun_config['coffee'] = {
 """"""""""""""""netrwの文句"""""""""""""""""""""
 let g:netrw_localcopycmd=''
 
+""""""""""""""c++"""""""""""""""""""""""""""""""
+set cindent
+set cinoptions=g-1
 """"""""""""""vim-latex"""""""""""""""""""""""""""""""""""""""
 if expand("%:e") == "tex"
   if has('win32')
