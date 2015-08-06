@@ -180,8 +180,8 @@ endif
 
 """"""""""""""""""""""""""""""
 set laststatus=2
-set list
-set listchars=tab:>.,eol:↲,extends:>,precedes:<,nbsp:%
+"set list
+"set listchars=tab:>.,eol:↲,extends:>,precedes:<,nbsp:%
 set cursorline
 
 "文字コード表示
