@@ -1,6 +1,8 @@
 colorscheme desert
 "let g:indent_guides_start_level = 2
 gui
+
+let g:indentLine_color_gui = '#A4E57E'
 "set transparency=200	"半透明220が標準説
 "
 """.gvimrc カラー設定

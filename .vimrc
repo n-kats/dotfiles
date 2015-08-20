@@ -107,7 +107,7 @@ let g:quickrun_config['coffee'] = {
 
 """""""""""""""""tagexplorer"""""""""""""""""""""""""""""""""""
 
-:set tags=tags
+:set tags=./tags
 
 
 """"""""""""""""netrwの文句"""""""""""""""""""""
@@ -202,3 +202,8 @@ endif
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
+
+"""indentLine
+let g:indentLine_fileTypeExclude = ['help', 'nerdtree']
+set list lcs=tab:\|\ ""
+let g:indentLine_color_term = 239
