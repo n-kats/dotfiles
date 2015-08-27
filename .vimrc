@@ -201,7 +201,7 @@ endif
 """vimfiler
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
 let g:vimfiler_as_default_explorer=1
-let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$|.dSYM\)'
+let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
 
 """indentLine
 let g:indentLine_fileTypeExclude = ['help', 'nerdtree']
