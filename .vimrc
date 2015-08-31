@@ -198,6 +198,10 @@ if $GOROOT != ''
   set rtp += $GOROOT/misc/vim
 endif
 
+"""vimshell
+nnoremap <silent> ,is :VimShell<CR>
+nnoremap <silent> ,irb :VimShellInteractive pry<CR>
+
 """vimfiler
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
 let g:vimfiler_as_default_explorer=1
