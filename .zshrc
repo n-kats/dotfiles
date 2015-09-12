@@ -115,6 +115,15 @@ case ${OSTYPE} in
     export GOPATH=$HOME/.go
     export PATH="$GOPATH/bin:$PATH"
 
+    ### cocos
+    # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+    export COCOS_CONSOLE_ROOT=/home/user/git/cocos2d-x/tools/cocos2d-console/bin
+    export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+    # Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
+    export COCOS_TEMPLATES_ROOT=/home/user/git/cocos2d-x/templates
+    export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+
   ;;
 esac
 
