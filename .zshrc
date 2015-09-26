@@ -28,7 +28,7 @@ SPROMPT="%{$fg[cyan]%}%{$suggest%}(*'~'%)? < もしかして %B%r%b %{$fg[cyan]%
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-
+function history-all { history -E 1 }
 # PROMPT="%{${fg[red]}%}[%n@%m]%{${reset_color}%} %~
 # %# "
 
