@@ -59,6 +59,11 @@ NeoBundle 'fatih/vim-go'
 NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundle 'nvie/vim-flake8'
+NeoBundle 'jvoorhis/coq.vim'
+NeoBundleLazy 'vim-scripts/CoqIDE', {
+      \ 'autoload' : {
+      \   'filetypes' : 'coq'
+      \ }}
 """
 
 call neobundle#end()
