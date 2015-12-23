@@ -55,6 +55,8 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'derekwyatt/vim-scala'
 
 NeoBundle 'fatih/vim-go'
+NeoBundle 'vim-jp/vim-go-extra'
+NeoBundle 'scrooloose/syntastic'
 
 NeoBundle 'editorconfig/editorconfig-vim'
 
@@ -202,6 +204,10 @@ inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 if $GOROOT != ''
   set rtp += $GOROOT/misc/vim
 endif
+
+let g:syntastic_mode_map = { 'mode': 'passive',
+    \ 'active_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['go', 'golint']
 
 """vimshell
 nnoremap <silent> ,is :VimShell<CR>
