@@ -27,6 +27,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 NeoBundle 'Shougo/vimshell'
 
+NeoBundle 'mattn/sonictemplate-vim'
+
 "NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'thinca/vim-quickrun'
