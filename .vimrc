@@ -70,6 +70,11 @@ NeoBundleLazy 'vim-scripts/CoqIDE', {
       \ }}
 """
 
+"""local plugins
+if filereadable( $HOME . "/.vimrc.neobundle.local")
+  sorce "~/.vimrc.neobundle.local"
+endif
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
@@ -224,3 +229,9 @@ let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
 let g:indentLine_fileTypeExclude = ['help', 'nerdtree']
 set list lcs=tab:\|\ ""
 let g:indentLine_color_term = 239
+
+"""vimrc.local
+if filereadable( $HOME . "/.vimrc.local")
+  sorce "~/.vimrc.local"
+endif
+

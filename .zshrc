@@ -128,3 +128,8 @@ case ${OSTYPE} in
 esac
 
 export LD_LIBRARY_PATH="/usr/local/lib"
+
+if [ -e "$HOME/.zshrc.local" ]; then
+  source "$HOME/.zshrc.local"
+fi
+
