@@ -3,10 +3,18 @@ set nocompatible  "Vi互換をオフ
 filetype plugin indent off
 
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#begin(expand('~/.vim/bundle'))
+  if has('nvim')
+    set runtimepath+=~/.nvim/bundle/neobundle.vim
+  else
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+  endif
 endif
 
+if has('nvim')
+  call neobundle#begin(expand('~/.nvim/bundle'))
+else
+  call neobundle#begin(expand('~/.vim/bundle'))
+endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 """"""""""""""""
@@ -70,9 +78,20 @@ NeoBundleLazy 'vim-scripts/CoqIDE', {
       \ }}
 """
 
+"""neovim plugins
+if has('neovim')
+  NeoBundle 'Shougo/deoplete.nvim'
+endif
+
 """local plugins
-if filereadable( $HOME . "/.vimrc.neobundle.local")
-  sorce "~/.vimrc.neobundle.local"
+if has('neovim')
+  if filereadable( $HOME . "/.nvimrc.neobundle.local")
+    sorce "~/.nvimrc.neobundle.local"
+  endif
+else
+  if filereadable( $HOME . "/.vimrc.neobundle.local")
+    sorce "~/.vimrc.neobundle.local"
+  endif
 endif
 
 call neobundle#end()
@@ -83,11 +102,17 @@ NeoBundleCheck
 
 set notitle "「Vimを使ってくれてありがとう」を消す
 set autoindent	"新しい行のインデントを現在行と同じにする
-set backupdir=$HOME/Documents/vim/backup
-""バックアップファイルを作るディレクトリ
-set directory=$HOME/Documents/vim/swap
-""スワップファイル用のディレクトリ
-set clipboard=unnamed	"クリップボードを連携
+if has('nvim')
+  set backupdir=$HOME/Documents/nvim/backup
+  set directory=$HOME/Documents/nvim/swap
+  set clipboard+=unnamedplus
+else
+  set backupdir=$HOME/Documents/vim/backup
+  ""バックアップファイルを作るディレクトリ
+  set directory=$HOME/Documents/vim/swap
+  ""スワップファイル用のディレクトリ
+  set clipboard=unnamed	"クリップボードを連携
+endif
 set number
 set wildmenu 	" コマンドライン補完を便利に
 set mouse=a 	" 全モードでマウスを有効化
@@ -121,7 +146,7 @@ let g:quickrun_config['coffee'] = {
 
 """""""""""""""""tagexplorer"""""""""""""""""""""""""""""""""""
 
-:set tags=./tags
+set tags=./tags
 
 
 """"""""""""""""netrwの文句"""""""""""""""""""""
@@ -231,7 +256,15 @@ set list lcs=tab:\|\ ""
 let g:indentLine_color_term = 239
 
 """vimrc.local
-if filereadable( $HOME . "/.vimrc.local")
-  sorce "~/.vimrc.local"
+if has('nvim')
+  if filereadable( $HOME . "/.nvimrc.local")
+    sorce "~/.nvimrc.local"
+  endif
+else
+  if filereadable( $HOME . "/.vimrc.local")
+    sorce "~/.vimrc.local"
+  endif
 endif
+
+syntax on
 
