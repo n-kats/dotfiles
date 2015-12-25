@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 ln -sf ~/git/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/git/dotfiles/.gvimrc ~/.gvimrc
