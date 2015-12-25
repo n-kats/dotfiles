@@ -1,9 +1,9 @@
 
 if has('nvim')
   if has('vim_starting')
-    set runtimepath+=~/.nvim/bundle/neobundle.vim
+    set runtimepath+=~/.cache/nvim/bundle/neobundle.vim
   endif
-  call neobundle#begin(expand('~/.nvim/bundle'))
+  call neobundle#begin(expand('~/.cache/nvim/bundle'))
 else
   filetype plugin indent on
   set nocompatible  "Vi互換をオフ
