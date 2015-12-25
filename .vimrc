@@ -1,20 +1,19 @@
-filetype plugin indent on
-set nocompatible  "Vi互換をオフ
-filetype plugin indent off
-
-if has('vim_starting')
-  if has('nvim')
-    set runtimepath+=~/.nvim/bundle/neobundle.vim
-  else
-    set runtimepath+=~/.vim/bundle/neobundle.vim
-  endif
-endif
 
 if has('nvim')
+  if has('vim_starting')
+    set runtimepath+=~/.nvim/bundle/neobundle.vim
+  endif
   call neobundle#begin(expand('~/.nvim/bundle'))
 else
+  filetype plugin indent on
+  set nocompatible  "Vi互換をオフ
+  filetype plugin indent off
+  if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+  endif
   call neobundle#begin(expand('~/.vim/bundle'))
 endif
+
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 """"""""""""""""
@@ -266,5 +265,7 @@ else
   endif
 endif
 
-syntax on
+if has('nvim')
+  syntax on
+endif
 
