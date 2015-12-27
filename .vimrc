@@ -127,7 +127,7 @@ set smarttab
 "= 3 ""補完しだす文字数
 "
 "
-"
+let g:deoplete#enable_at_startup = 1
 """"""""""""quickrun""""""""""""""""""""""""""""""
 let g:quickrun_config={'*': {'split': ''}}
 set splitright
@@ -266,6 +266,7 @@ else
 endif
 
 if has('nvim')
+  tnoremap <ESC> <C-\><C-n>
   syntax on
 endif
 
