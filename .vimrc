@@ -1,4 +1,3 @@
-
 if has('nvim')
   if has('vim_starting')
     set runtimepath+=~/.config/nvim/bundle/neobundle.vim
@@ -78,18 +77,18 @@ NeoBundleLazy 'vim-scripts/CoqIDE', {
 """
 
 """neovim plugins
-if has('neovim')
+if has('nvim')
   NeoBundle 'Shougo/deoplete.nvim'
 endif
 
 """local plugins
-if has('neovim')
-  if filereadable( $HOME . "/.nvimrc.neobundle.local")
-    sorce "~/.nvimrc.neobundle.local"
+if has('nvim')
+  if filereadable(expand("~/.nvimrc.neobundle.local"))
+    source ~/.nvimrc.neobundle.local
   endif
 else
-  if filereadable( $HOME . "/.vimrc.neobundle.local")
-    sorce "~/.vimrc.neobundle.local"
+  if filereadable(expand("~/.vimrc.neobundle.local"))
+    source ~/.vimrc.neobundle.local
   endif
 endif
 
@@ -256,12 +255,12 @@ let g:indentLine_color_term = 239
 
 """vimrc.local
 if has('nvim')
-  if filereadable( $HOME . "/.nvimrc.local")
-    sorce "~/.nvimrc.local"
+  if filereadable(expand("~/.nvimrc.local"))
+    source ~/.nvimrc.local
   endif
 else
-  if filereadable( $HOME . "/.vimrc.local")
-    sorce "~/.vimrc.local"
+  if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
   endif
 endif
 
