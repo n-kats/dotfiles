@@ -154,6 +154,7 @@ let g:netrw_localcopycmd=''
 set cindent
 set cinoptions=g-1
 """"""""""""""vim-latex"""""""""""""""""""""""""""""""""""""""
+let g:tex_conceal='' "うざい式表示を滅ぼす
 if expand("%:e") == "tex"
   if has('win32')
     let ostype = "Win"
@@ -181,7 +182,7 @@ if expand("%:e") == "tex"
   else
     filetype plugin on
     filetype indent on
-    "set shellslash		""削ったけど大丈夫かな？
+    set shellslash
     set grepprg=grep\ -nH\ $*
 
     let g:tex_flavor='latex'
@@ -211,7 +212,6 @@ if expand("%:e") == "tex"
     "let g:Tex_BibtexFlavor = 'pbibtex -kanji=sjis'
     "let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'
 
-    set noshellslash
   endif
 endif
 
