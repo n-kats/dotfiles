@@ -88,6 +88,10 @@ eval "$(anyenv init -)"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+### go
+export GOPATH=$HOME/.go
+export PATH="$GOPATH/bin:$PATH"
+
 ### FIXME
 case ${OSTYPE} in
   darwin*)
@@ -105,15 +109,8 @@ case ${OSTYPE} in
     # pylearnのチュートリアル用
     export PATH=~/git/pylearn2/pylearn2/script:$PATH
 
-
-    ### go
-    export GOPATH=$HOME/Documents/go/third-party:$HOME/Documents/go/my-project
-    export PATH="$HOME/Documents/go/third-party/bin:$HOME/Documents/go/my-project/bin:$PATH"
   ;;
   linux*)
-    ### go
-    export GOPATH=$HOME/.go
-    export PATH="$GOPATH/bin:$PATH"
 
     ### cocos
     # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
