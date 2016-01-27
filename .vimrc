@@ -239,9 +239,6 @@ let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go'] }
 let g:syntastic_go_checkers = ['go', 'golint']
 
-let g:go_fmt_command = 'goimports'
-let g:go_fmt_autosave = 1
-
 """vimshell
 nnoremap <silent> ,is :VimShell<CR>
 nnoremap <silent> ,irb :VimShellInteractive pry<CR>
