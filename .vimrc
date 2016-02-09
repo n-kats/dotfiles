@@ -182,7 +182,7 @@ if expand("%:e") == "tex"
     let g:Tex_UseEditorSettingInDVIViewer = 1
     let g:Tex_ViewRule_pdf = '/usr/bin/open'
   else
-    inoremap <silent> <C-S> $
+    inoremap <silent> <C-S> $$<ESC>i
 
     filetype plugin on
     filetype indent on
