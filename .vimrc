@@ -117,6 +117,8 @@ set mouse=a 	" 全モードでマウスを有効化
 set showmatch	" 括弧の対応をハイライト
 set smarttab
 
+inoremap <silent> jj <ESC>
+
 """""""""""""""""""""""""""""""""
 "neocomplcache
 ""let
@@ -180,6 +182,8 @@ if expand("%:e") == "tex"
     let g:Tex_UseEditorSettingInDVIViewer = 1
     let g:Tex_ViewRule_pdf = '/usr/bin/open'
   else
+    inoremap <silent> <C-S> $
+
     filetype plugin on
     filetype indent on
     set shellslash
