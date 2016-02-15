@@ -220,19 +220,18 @@ if expand("%:e") == "tex"
 endif
 
 """"""""""""""""""""""""""""""
-set laststatus=2
-"set list
-"set listchars=tab:>.,eol:↲,extends:>,precedes:<,nbsp:%
 set cursorline
 
-"文字コード表示
-set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}]
-""ファイルタイプ表示
-set statusline+=%y
+""" statusline
+set laststatus=2
+set statusline+=%r "ReadOnly?
+set statusline+=%y "ファイルタイプ表示
+set statusline+=%f "ファイル名
+set statusline+=%m "Modified?
+set statusline+=%= "これより右詰め
+set statusline+=[%P,%c]
+set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}] "文字コード表示
 
-"""
-let IM_CtrlMode = 4
-inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 
 """go
 if $GOROOT != ''
