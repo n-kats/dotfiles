@@ -79,6 +79,7 @@ NeoBundleLazy 'vim-scripts/CoqIDE', {
 """neovim plugins
 if has('nvim')
   NeoBundle 'Shougo/deoplete.nvim'
+  NeoBundle 'zchee/deoplete-go', {'build': {'unix': 'make'}}
 endif
 
 """local plugins
