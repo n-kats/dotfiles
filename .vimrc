@@ -1,28 +1,17 @@
-if has('nvim')
-  if has('vim_starting')
-    set runtimepath+=~/.config/nvim/bundle/neobundle.vim
-  endif
-  call neobundle#begin(expand('~/.config/nvim/bundle'))
-else
-  filetype plugin indent on
-  set nocompatible  "Vi互換をオフ
-  filetype plugin indent off
-  if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim
-  endif
-  call neobundle#begin(expand('~/.vim/bundle'))
+if &compatible
+  set nocompatible
 endif
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+set runtimepath^=/home/user/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+call dein#begin(expand('/home/user/.config/nvim/dein'))
+call dein#add('Shougo/dein.vim')
 
-""""""""""""""""
-"list of plugin"
-"""""""""""""""""
-NeoBundle 'Shougo/unite.vim'
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
 
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/vimproc.vim', {
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/vimfiler')
+call dein#add('Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
 \     'cygwin' : 'make -f make_cygwin.mak',
@@ -30,74 +19,84 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'linux' : 'make',
 \     'unix' : 'gmake',
 \    },
-\ }
-NeoBundle 'Shougo/vimshell'
+\ })
+call dein#add('Shougo/vimshell')
+call dein#add('mattn/sonictemplate-vim')
+call dein#add('thinca/vim-quickrun')
+call dein#add('grep.vim')
+call dein#add('majutsushi/tagbar')
+"call dein#add('tomtom/tcomment_vim')
+call dein#add('editorconfig/editorconfig-vim')
 
-NeoBundle 'mattn/sonictemplate-vim'
+""" html
+call dein#add('mattn/emmet-vim')
+call dein#add('slim-template/vim-slim')
 
-"NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'vim-latex/vim-latex'
-NeoBundle 'grep.vim'
-NeoBundle 'slim-template/vim-slim'
-"NeoBundle 'tyru/eskk.vim'
-"NeoBundle 'fuenor/im_control.vim'
-"NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-endwise'
-"NeoBundle 'alpaca-tc/alpaca_tags'
+""" tex
+call dein#add('vim-latex/vim-latex')
 
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'leafgarland/typescript-vim'
-NeoBundle 'jason0x43/vim-js-indent'
-NeoBundle 'mxw/vim-jsx'
-""NeoBundle 'claco/jasmine.vim'
-""NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mtscout6/vim-cjsx'
-NeoBundle 'majutsushi/tagbar'
-""NeoBundle 'vim-scripts/ruby-matchit'
-""NeoBundle 'tomtom/tcomment_vim'
-"
-NeoBundle 'derekwyatt/vim-scala'
+""" ruby
+call dein#add('tpope/vim-rails')
+call dein#add('tpope/vim-endwise')
+"call dein#add('alpaca-tc/alpaca_tags')
+"call dein#add('vim-scripts/ruby-matchit')
 
-NeoBundle 'fatih/vim-go'
-NeoBundle 'vim-jp/vim-go-extra'
-NeoBundle 'scrooloose/syntastic'
+""" javascript
+call dein#add('Yggdroot/indentLine')
+call dein#add('leafgarland/typescript-vim')
+call dein#add('jason0x43/vim-js-indent')
+call dein#add('mxw/vim-jsx')
 
-NeoBundle 'editorconfig/editorconfig-vim'
+"call dein#add('claco/jasmine.vim')
+"call dein#add('nathanaelkane/vim-indent-guides')
+call dein#add('kchmck/vim-coffee-script')
+call dein#add('mtscout6/vim-cjsx')
 
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'jvoorhis/coq.vim'
-NeoBundleLazy 'vim-scripts/CoqIDE', {
-      \ 'autoload' : {
-      \   'filetypes' : 'coq'
-      \ }}
+""" scala
+call dein#add('derekwyatt/vim-scala')
+
+""" go
+call dein#add('fatih/vim-go')
+call dein#add('vim-jp/vim-go-extra')
+call dein#add('scrooloose/syntastic')
+
+""" python
+call dein#add('nvie/vim-flake8')
+
+""" coq
+"call dein#add('jvoorhis/coq.vim')
+"call dein#add('vim-scripts/CoqIDE', {
+"      \ 'autoload' : {
+"      \   'filetypes' : 'coq'
+"      \ }})
 """
 
 """neovim plugins
 if has('nvim')
-  NeoBundle 'Shougo/deoplete.nvim'
-  NeoBundle 'zchee/deoplete-go', {'build': {'unix': 'make'}}
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-go', {'build': {'unix': 'make'}})
 endif
 
 """local plugins
 if has('nvim')
-  if filereadable(expand("~/.nvimrc.neobundle.local"))
-    source ~/.nvimrc.neobundle.local
+  if filereadable(expand("~/.nvimrc.plugin.local"))
+    source ~/.nvimrc.plugin.local
   endif
 else
-  if filereadable(expand("~/.vimrc.neobundle.local"))
-    source ~/.vimrc.neobundle.local
+  if filereadable(expand("~/.vimrc.plugin.local"))
+    source ~/.vimrc.plugin.local
   endif
 endif
 
-call neobundle#end()
-filetype plugin indent on
-NeoBundleCheck
+call dein#end()
 
-"""common""""""""""""""""""""""""""""""""
+filetype plugin indent on
+if dein#check_install()
+  call dein#install()
+endif
+
+
+""" common
 
 set notitle "「Vimを使ってくれてありがとう」を消す
 set autoindent	"新しい行のインデントを現在行と同じにする
@@ -120,16 +119,9 @@ set smarttab
 
 inoremap <silent> jj <ESC>
 
-"""""""""""""""""""""""""""""""""
-"neocomplcache
-""let
-"g:neocomplcache_enable_at_startup = 2
-"let
-"g:neocomplcache_auto_completion_start_length
-"= 3 ""補完しだす文字数
-"
-"
+""" deoplete
 let g:deoplete#enable_at_startup = 1
+
 """"""""""""quickrun""""""""""""""""""""""""""""""
 let g:quickrun_config={'*': {'split': ''}}
 set splitright
@@ -144,14 +136,6 @@ let g:quickrun_config['coffee'] = {
       \'command' : 'cjsx',
       \'exec' : ['%c -cbp %s']
       \}
-
-"""""""""""""""""tagexplorer"""""""""""""""""""""""""""""""""""
-
-set tags=./tags
-
-
-""""""""""""""""netrwの文句"""""""""""""""""""""
-let g:netrw_localcopycmd=''
 
 """"""""""""""c++"""""""""""""""""""""""""""""""
 set cindent
@@ -234,30 +218,45 @@ set statusline+=[%P,%c]
 set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}] "文字コード表示
 
 
-"""go
-if $GOROOT != ''
-  set rtp += $GOROOT/misc/vim
-endif
-
+""" go
 let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go'] }
 let g:syntastic_go_checkers = ['go', 'golint']
 
-"""vimshell
+""" neosnippet
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+""" vimshell
 nnoremap <silent> ,is :VimShell<CR>
 nnoremap <silent> ,irb :VimShellInteractive pry<CR>
 
-"""vimfiler
+""" vimfiler
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
 
-"""indentLine
-let g:indentLine_fileTypeExclude = ['help', 'nerdtree']
+""" tagbar
+nnoremap <leader>t :TagbarToggle<CR>
+
+""" indentLine
+let g:indentLine_fileTypeExclude = ['help']
 set list lcs=tab:\|\ ""
 let g:indentLine_color_term = 239
 
-"""vimrc.local
+""" vimrc.local
 if has('nvim')
   if filereadable(expand("~/.nvimrc.local"))
     source ~/.nvimrc.local
@@ -268,7 +267,7 @@ else
   endif
 endif
 
-"""Alt+{h,j,k,l}でウィンドウ移動
+""" Alt+{h,j,k,l}でウィンドウ移動
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
