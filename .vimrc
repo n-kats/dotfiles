@@ -2,7 +2,7 @@ if &compatible
   set nocompatible
 endif
 
-set runtimepath^=/home/user/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath^=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('/home/user/.config/nvim/dein'))
 call dein#add('Shougo/dein.vim')
 
