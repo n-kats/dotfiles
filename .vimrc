@@ -2,8 +2,8 @@ if &compatible
   set nocompatible
 endif
 
-set runtimepath^=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
-call dein#begin(expand('/home/user/.config/nvim/dein'))
+set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
+call dein#begin(expand('~/.cache/nvim/dein'))
 call dein#add('Shougo/dein.vim')
 
 call dein#add('Shougo/neosnippet.vim')
@@ -46,6 +46,7 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('leafgarland/typescript-vim')
 call dein#add('jason0x43/vim-js-indent')
 call dein#add('mxw/vim-jsx')
+call dein#add('elzr/vim-json')
 
 "call dein#add('claco/jasmine.vim')
 "call dein#add('nathanaelkane/vim-indent-guides')
@@ -95,7 +96,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-
 """ common
 
 set notitle "「Vimを使ってくれてありがとう」を消す
@@ -121,6 +121,9 @@ inoremap <silent> jj <ESC>
 
 """ deoplete
 let g:deoplete#enable_at_startup = 1
+
+""" editorconfig
+let g:EditorConfig_core_mode = 'external_command'
 
 """"""""""""quickrun""""""""""""""""""""""""""""""
 let g:quickrun_config={'*': {'split': ''}}
@@ -223,6 +226,9 @@ let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go'] }
 let g:syntastic_go_checkers = ['go', 'golint']
 
+""" json
+let g:vim_json_syntax_conceal = 0
+
 """ neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -280,4 +286,3 @@ if has('nvim')
   tnoremap <A-l> <C-\><C-n><C-w>l
   syntax on
 endif
-
