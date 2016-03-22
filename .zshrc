@@ -22,7 +22,7 @@ PROMPT="[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
 PROMPT2='[%n]> '
 
 # プロンプト指定（もしかして）
-SPROMPT="%{$fg[cyan]%}%{$suggest%}(*'~'%)? < もしかして %B%r%b %{$fg[cyan]%}かな？ [そう！(y), 違う！(n), a, e]:${reset_color} "
+SPROMPT="%{$fg[cyan]%}%{$suggest%}(*'~'%)? < もしかして %{$fg[magenta]%}%B%r%b %{$fg[cyan]%}かな？ [そう！(y), 違う！(n), a, e]:${reset_color} "
 
 ############################
 HISTFILE=~/.zsh_history
