@@ -62,6 +62,7 @@ call dein#add('vim-jp/vim-go-extra')
 call dein#add('scrooloose/syntastic')
 
 """ python
+call dein#add('davidhalter/jedi-vim')
 call dein#add('nvie/vim-flake8')
 
 """ coq
@@ -226,6 +227,12 @@ let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go'] }
 let g:syntastic_go_checkers = ['go', 'golint']
 
+""" python
+let g:jedi#auto_initialization = 1
+let g:jedi#rename_command = "<leader>R"
+let g:jedi#popup_on_dot = 1
+autocmd FileType python let b:did_ftplugin = 1
+
 """ json
 let g:vim_json_syntax_conceal = 0
 
@@ -244,10 +251,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-
-""" vimshell
-nnoremap <silent> ,is :VimShell<CR>
-nnoremap <silent> ,irb :VimShellInteractive pry<CR>
 
 """ vimfiler
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
