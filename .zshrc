@@ -112,18 +112,18 @@ case ${OSTYPE} in
   ;;
   linux*)
     ### cuda
-    export PATH=/usr/local/cuda/bin:$PATH
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
-    export CUDA_HOME=/usr/local/cuda
+    # export PATH=/usr/local/cuda/bin:$PATH
+    # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
+    # export CUDA_HOME=/usr/local/cuda
 
     ### cocos
     # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-    export COCOS_CONSOLE_ROOT=/home/user/git/cocos2d-x/tools/cocos2d-console/bin
-    export PATH=$COCOS_CONSOLE_ROOT:$PATH
+    # export COCOS_CONSOLE_ROOT=/home/user/git/cocos2d-x/tools/cocos2d-console/bin
+    # export PATH=$COCOS_CONSOLE_ROOT:$PATH
 
     # Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-    export COCOS_TEMPLATES_ROOT=/home/user/git/cocos2d-x/templates
-    export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+    # export COCOS_TEMPLATES_ROOT=/home/user/git/cocos2d-x/templates
+    # export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
   ;;
 esac
@@ -135,3 +135,6 @@ if [ -e "$HOME/.zshrc.local" ]; then
 fi
 
 export PATH="$HOME/bin:$PATH"
+
+
+. /home/user/git/torch/install/bin/torch-activate

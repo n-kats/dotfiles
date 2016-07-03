@@ -131,14 +131,21 @@ let g:quickrun_config={'*': {'split': ''}}
 set splitright
 let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
 
+"let g:quickrun_config['cpp'] = {
+"      \'command' : 'clang++',
+"      \'cmdopt' : '-std=c++14',
+"      \}
 let g:quickrun_config['cpp'] = {
-      \'command' : 'clang++',
+      \'command' : 'g++',
       \'cmdopt' : '-std=c++14',
       \}
 "cjsxでcoffeeを処理する
 let g:quickrun_config['coffee'] = {
       \'command' : 'cjsx',
       \'exec' : ['%c -cbp %s']
+      \}
+let g:quickrun_config['python'] = {
+      \'command' : 'python3'
       \}
 
 """"""""""""""c++"""""""""""""""""""""""""""""""
@@ -209,7 +216,7 @@ if expand("%:e") == "tex"
 endif
 
 """"""""""""""""""""""""""""""
-set cursorline
+" set cursorline
 
 """ statusline
 set laststatus=2
@@ -253,6 +260,11 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+""" sonictemplate
+let g:sonictemplate_vim_template_dir = [
+      \ '~/git/template'
+      \]
 
 """ vimfiler
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
