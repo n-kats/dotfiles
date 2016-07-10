@@ -128,6 +128,8 @@ case ${OSTYPE} in
     # export COCOS_TEMPLATES_ROOT=/home/user/git/cocos2d-x/templates
     # export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
+    ### torch
+    . /home/user/git/torch/install/bin/torch-activate
   ;;
 esac
 
@@ -140,4 +142,3 @@ fi
 export PATH="$HOME/bin:$PATH"
 
 
-. /home/user/git/torch/install/bin/torch-activate
