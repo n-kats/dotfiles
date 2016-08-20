@@ -109,6 +109,9 @@ case ${OSTYPE} in
     # pylearnのチュートリアル用
     export PATH=~/git/pylearn2/pylearn2/script:$PATH
 
+    ### cling
+    export CLING_PATH=~/tools/cling_2016-07-06_mac1011/bin
+    export PATH=$CLING_PATH:$PATH
   ;;
   linux*)
     ### cuda
@@ -125,6 +128,8 @@ case ${OSTYPE} in
     # export COCOS_TEMPLATES_ROOT=/home/user/git/cocos2d-x/templates
     # export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
+    ### torch
+    . /home/user/git/torch/install/bin/torch-activate
   ;;
 esac
 
@@ -137,4 +142,3 @@ fi
 export PATH="$HOME/bin:$PATH"
 
 
-. /home/user/git/torch/install/bin/torch-activate
