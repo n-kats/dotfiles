@@ -11,15 +11,8 @@ call dein#add('Shougo/neosnippet-snippets')
 
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/vimfiler')
-call dein#add('Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ })
+call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+
 call dein#add('Shougo/vimshell')
 call dein#add('mattn/sonictemplate-vim')
 call dein#add('thinca/vim-quickrun')
