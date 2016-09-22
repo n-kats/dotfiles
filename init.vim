@@ -4,59 +4,7 @@ endif
 
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/nvim/dein'))
-call dein#add('Shougo/dein.vim')
-
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-
-call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/vimfiler')
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-
-call dein#add('Shougo/vimshell')
-call dein#add('mattn/sonictemplate-vim')
-call dein#add('thinca/vim-quickrun')
-call dein#add('grep.vim')
-call dein#add('majutsushi/tagbar')
-"call dein#add('tomtom/tcomment_vim')
-call dein#add('editorconfig/editorconfig-vim')
-
-""" html
-call dein#add('mattn/emmet-vim')
-call dein#add('slim-template/vim-slim')
-
-""" tex
-call dein#add('vim-latex/vim-latex')
-
-""" ruby
-call dein#add('tpope/vim-rails')
-call dein#add('tpope/vim-endwise')
-"call dein#add('alpaca-tc/alpaca_tags')
-"call dein#add('vim-scripts/ruby-matchit')
-
-""" javascript
-call dein#add('Yggdroot/indentLine')
-call dein#add('leafgarland/typescript-vim')
-call dein#add('jason0x43/vim-js-indent')
-call dein#add('mxw/vim-jsx')
-call dein#add('elzr/vim-json')
-
-"call dein#add('claco/jasmine.vim')
-"call dein#add('nathanaelkane/vim-indent-guides')
-call dein#add('kchmck/vim-coffee-script')
-call dein#add('mtscout6/vim-cjsx')
-
-""" scala
-call dein#add('derekwyatt/vim-scala')
-
-""" go
-call dein#add('fatih/vim-go')
-call dein#add('vim-jp/vim-go-extra')
-call dein#add('scrooloose/syntastic')
-
-""" python
-call dein#add('davidhalter/jedi-vim')
-call dein#add('nvie/vim-flake8')
+call dein#load_toml('~/.config/nvim/dein.toml')
 
 """ coq
 "call dein#add('jvoorhis/coq.vim')

@@ -1,0 +1,146 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'grep.vim'
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+# [[plugins]]
+# repo = 'tomtom/tcomment_vim'
+
+# html
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'slim-template/vim-slim'
+on_ft = 'slim'
+
+# tex
+[[plugins]]
+repo = 'vim-latex/vim-latex'
+on_ft = 'tex'
+
+# ruby
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = 'ruby'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+# [[plugins]]
+# repo = 'alpaca-tc/alpaca_tags'
+
+# [[plugins]]
+# repo = 'vim-scripts/ruby-matchit'
+
+# javascript
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'elzr/vim-json'
+on_ft = 'json'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = 'typescript'
+
+[[plugins]]
+repo = 'jason0x43/vim-js-indent'
+
+[[plugins]]
+repo = 'mxw/vim-jsx'
+on_ft = 'jsx'
+
+# [[plugins]]
+# repo = 'claco/jasmine/vim'
+
+# [[plugins]]
+# repo = 'nathanaelkane/vim-indent-guides'
+
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+on_ft = 'coffee'
+
+[[plugins]]
+repo = 'mtscout6/vim-cjsx'
+on_ft = 'cjsx'
+
+[[plugins]]
+repo = 'ryym/vim-riot'
+on_ft = 'tag'
+
+# scala
+[[plugins]]
+repo = 'derekwyatt/vim-scala'
+on_ft = 'scala'
+
+# go
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+on_ft = 'go'
+
+# python
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'nvie/vim-flake8'
+on_ft = 'python'
+
+# toml
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+# vim
+[[plugins]]
+repo = 'thinca/vim-ft-diff_fold'
+on_ft = 'diff'
+
+[[plugins]]
+repo = 'thinca/vim-ft-vim_fold'
+on_ft = 'vim'
+
+[[plugins]]
+repo = 'thinca/vim-ft-help_fold'
+on_ft = 'help'
+
