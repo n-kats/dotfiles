@@ -6,20 +6,6 @@ set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/nvim/dein'))
 call dein#load_toml('~/.config/nvim/dein.toml')
 
-""" coq
-"call dein#add('jvoorhis/coq.vim')
-"call dein#add('vim-scripts/CoqIDE', {
-"      \ 'autoload' : {
-"      \   'filetypes' : 'coq'
-"      \ }})
-"""
-
-"""neovim plugins
-if has('nvim')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('zchee/deoplete-go', {'build': {'unix': 'make'}})
-endif
-
 """local plugins
 if has('nvim')
   if filereadable(expand("~/.nvimrc.plugin.local"))
@@ -60,12 +46,6 @@ set showmatch	" 括弧の対応をハイライト
 set smarttab
 
 inoremap <silent> jj <ESC>
-
-""" deoplete
-let g:deoplete#enable_at_startup = 1
-
-""" editorconfig
-let g:EditorConfig_core_mode = 'external_command'
 
 """"""""""""quickrun""""""""""""""""""""""""""""""
 let g:quickrun_config={'*': {'split': ''}}
@@ -135,24 +115,12 @@ if expand("%:e") == "tex"
     let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 
     let g:Tex_CompileRule_pdf = 'ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
-    "let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-    "let g:Tex_CompileRule_pdf = 'lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-    "let g:Tex_CompileRule_pdf = 'luajitlatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-    "let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-    "let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
     let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
     let g:Tex_CompileRule_dvi = 'uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
     let g:Tex_BibtexFlavor = 'upbibtex'
     let g:Tex_MakeIndexFlavor = 'upmendex $*.idx'
     let g:Tex_UseEditorSettingInDVIViewer = 1
     let g:Tex_ViewRule_pdf = 'xdg-open'
-
-    "let g:Tex_CompileRule_dvi = 'platex -kanji=sjis -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
-    "let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
-    "let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-    "let g:Tex_BibtexFlavor = 'pbibtex -kanji=sjis'
-    "let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'
-
   endif
 endif
 
@@ -169,11 +137,6 @@ set statusline+=%= "これより右詰め
 set statusline+=[%P,%c]
 set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}] "文字コード表示
 
-
-""" go
-let g:syntastic_mode_map = { 'mode': 'passive',
-    \ 'active_filetypes': ['go'] }
-let g:syntastic_go_checkers = ['go', 'golint']
 
 """ python
 let g:jedi#auto_initialization = 1
