@@ -2,9 +2,10 @@ if &compatible
   set nocompatible
 endif
 
+let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/nvim/dein'))
-call dein#load_toml('~/.config/nvim/dein.toml')
+call dein#load_toml($MY_DEIN_TOML)
 
 """local plugins
 if has('nvim')
