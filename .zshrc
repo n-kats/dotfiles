@@ -141,4 +141,5 @@ fi
 
 export PATH="$HOME/bin:$PATH"
 
-
+alias :e=nvim
+alias :r="nvim -R"
