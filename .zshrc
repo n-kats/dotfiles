@@ -100,18 +100,9 @@ case ${OSTYPE} in
     alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
     ###
 
-    ### python
-    export WORKON_HOME=$HOME/.virtualenvs
-    export PROJECT_HOME=$HOME/dev
-    source `which virtualenvwrapper.sh`
-    export PYLEARN2_DATA_PATH=~/data/pylean2
-    export PYLEARN2_VIEWER_COMMAND="open -Wn"
-    # pylearnのチュートリアル用
-    export PATH=~/git/pylearn2/pylearn2/script:$PATH
-
     ### cling
-    export CLING_PATH=~/tools/cling_2016-07-06_mac1011/bin
-    export PATH=$CLING_PATH:$PATH
+    # export CLING_PATH=~/tools/cling_2016-07-06_mac1011/bin
+    # export PATH=$CLING_PATH:$PATH
   ;;
   linux*)
     ### cuda
