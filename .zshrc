@@ -118,6 +118,7 @@ case ${OSTYPE} in
     export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
     export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
     export CUDA_HOME=/usr/local/cuda
+    export CUDA_PATH=/usr/local/cuda
 
     ### cocos
     # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
@@ -133,7 +134,7 @@ case ${OSTYPE} in
   ;;
 esac
 
-export LD_LIBRARY_PATH="/usr/local/lib"
+#export LD_LIBRARY_PATH="/usr/local/lib"
 
 if [ -e "$HOME/.zshrc.local" ]; then
   source "$HOME/.zshrc.local"
