@@ -68,7 +68,7 @@ let g:quickrun_config['coffee'] = {
       \'exec' : ['%c -cbp %s']
       \}
 let g:quickrun_config['python'] = {
-      \'command' : 'python3'
+      \'command' : 'python'
       \}
 
 """"""""""""""c++"""""""""""""""""""""""""""""""
