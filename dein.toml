@@ -158,6 +158,13 @@ hook_add = '''
 repo = 'nvie/vim-flake8'
 on_ft = 'python'
 
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_ft = 'python'
+hook_add = '''
+  let g:python_host_prog_ = system('which python')
+'''
+
 # toml
 [[plugins]]
 repo = 'cespare/vim-toml'
