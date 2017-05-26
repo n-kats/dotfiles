@@ -32,7 +32,7 @@ repo = 'mattn/sonictemplate-vim'
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
-repo = 'grep.vim'
+repo = 'vim-scripts/grep.vim'
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
@@ -47,6 +47,21 @@ hook_add = '''
 # repo = 'tomtom/tcomment_vim'
 
 # html
+
+[[plugins]]
+repo = 'vim-syntastic/syntastic'
+hook_add = '''
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+  " let g:syntastic_mode_map = { 'mode': 'passive',
+  "    \ 'active_filetypes': ['go'] }
+  " let g:syntastic_go_checkers = ['go', 'golint']
+'''
 [[plugins]]
 repo = 'mattn/emmet-vim'
 
@@ -123,15 +138,6 @@ on_ft = 'go'
 [[plugins]]
 repo = 'vim-jp/vim-go-extra'
 on_ft = 'go'
-
-[[plugins]]
-repo = 'scrooloose/syntastic'
-on_ft = 'go'
-hook_add = '''
-  let g:syntastic_mode_map = { 'mode': 'passive',
-      \ 'active_filetypes': ['go'] }
-  let g:syntastic_go_checkers = ['go', 'golint']
-'''
 
 [[plugins]]
 repo = 'zchee/deoplete-go'
