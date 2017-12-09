@@ -157,6 +157,7 @@ hook_add = '''
   let g:jedi#rename_command = "<leader>R"
   let g:jedi#popup_on_dot = 1
   let g:jedi#completions_command = "<C-c>"
+  let g:jedi#force_py_version = 3
 '''
 
 [[plugins]]
