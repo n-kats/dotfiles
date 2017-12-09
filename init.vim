@@ -1,21 +1,14 @@
-if &compatible
-  set nocompatible
-endif
+" Package: {{{1
 
 let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
+let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.toml'
+
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/nvim/dein'))
 call dein#load_toml($MY_DEIN_TOML)
 
-"""local plugins
-if has('nvim')
-  if filereadable(expand("~/.nvimrc.plugin.local"))
-    source ~/.nvimrc.plugin.local
-  endif
-else
-  if filereadable(expand("~/.vimrc.plugin.local"))
-    source ~/.vimrc.plugin.local
-  endif
+if filereadable(expand($LOCAL_DEIN_TOML))
+  call dein#load_toml($LOCAL_DEIN_TOML)
 endif
 
 call dein#end()
@@ -24,6 +17,7 @@ filetype plugin indent on
 if dein#check_install()
   call dein#install()
 endif
+" }}}
 
 """ common
 
