@@ -1,3 +1,18 @@
+" PythonPath": {{{
+if system('type pyenv &>/dev/null && echo -n 1')
+  let g:python_host_prog=$PYENV_ROOT.'/versions/neovim2/bin/python'
+  if system('(pyenv version | grep system) &>/dev/null && echo -n 1')
+    let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim3/bin/python'
+  else
+    let g:python3_host_prog=system('echo -n $(which python)')
+  endif
+else
+  let g:python_host_prog=system('echo -n $(which python)')
+  let g:python3_host_prog=system('echo -n $(which python3)')
+endif
+" }}}
+
+
 " Package": {{{
 
 let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'

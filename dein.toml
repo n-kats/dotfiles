@@ -48,20 +48,20 @@ hook_add = '''
 
 # html
 
-[[plugins]]
-repo = 'vim-syntastic/syntastic'
-hook_add = '''
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-  " let g:syntastic_mode_map = { 'mode': 'passive',
-  "    \ 'active_filetypes': ['go'] }
-  " let g:syntastic_go_checkers = ['go', 'golint']
-'''
+# [[plugins]]
+# repo = 'vim-syntastic/syntastic'
+# hook_add = '''
+#   set statusline+=%#warningmsg#
+#   set statusline+=%{SyntasticStatuslineFlag()}
+#   set statusline+=%*
+#   let g:syntastic_always_populate_loc_list = 1
+#   let g:syntastic_auto_loc_list = 1
+#   let g:syntastic_check_on_open = 1
+#   let g:syntastic_check_on_wq = 0
+#   " let g:syntastic_mode_map = { 'mode': 'passive',
+#   "    \ 'active_filetypes': ['go'] }
+#   " let g:syntastic_go_checkers = ['go', 'golint']
+# '''
 [[plugins]]
 repo = 'mattn/emmet-vim'
 
@@ -145,10 +145,9 @@ on_i = 1
 on_ft = 'go'
 
 # python
-[[plugins]]
-repo = 'jmcantrell/vim-virtualenv'
-on_ft = 'python'
-
+# [[plugins]]
+# repo = 'jmcantrell/vim-virtualenv'
+# on_ft = 'python'
 
 [[plugins]]
 repo = 'davidhalter/jedi-vim'
@@ -167,9 +166,6 @@ on_ft = 'python'
 [[plugins]]
 repo = 'zchee/deoplete-jedi'
 on_ft = 'python'
-hook_add = '''
-  let g:python_host_prog_ = system('which python')
-'''
 
 # toml
 [[plugins]]
