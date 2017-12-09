@@ -1,4 +1,3 @@
-# Created by newuser for 5.0.7
 export LANG=ja_JP.UTF-8
 # 色
 autoload -Uz colors
@@ -103,6 +102,9 @@ case ${OSTYPE} in
     ### cling
     # export CLING_PATH=~/tools/cling_2016-07-06_mac1011/bin
     # export PATH=$CLING_PATH:$PATH
+
+    ### Rust
+    export PATH="$HOME/.cargo/bin:$PATH"
   ;;
   linux*)
     ### cuda
