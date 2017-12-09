@@ -145,10 +145,9 @@ on_i = 1
 on_ft = 'go'
 
 # python
-[[plugins]]
-repo = 'jmcantrell/vim-virtualenv'
-on_ft = 'python'
-
+# [[plugins]]
+# repo = 'jmcantrell/vim-virtualenv'
+# on_ft = 'python'
 
 [[plugins]]
 repo = 'davidhalter/jedi-vim'
@@ -158,6 +157,7 @@ hook_add = '''
   let g:jedi#rename_command = "<leader>R"
   let g:jedi#popup_on_dot = 1
   let g:jedi#completions_command = "<C-c>"
+  let g:jedi#force_py_version = 3
 '''
 
 [[plugins]]

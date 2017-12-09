@@ -1,21 +1,29 @@
-if &compatible
-  set nocompatible
+" PythonPath": {{{
+if system('type pyenv &>/dev/null && echo -n 1')
+  let g:python_host_prog=$PYENV_ROOT.'/versions/neovim2/bin/python'
+  if system('(pyenv version | grep system) &>/dev/null && echo -n 1')
+    let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim3/bin/python'
+  else
+    let g:python3_host_prog=system('echo -n $(which python)')
+  endif
+else
+  let g:python_host_prog=system('echo -n $(which python)')
+  let g:python3_host_prog=system('echo -n $(which python3)')
 endif
+" }}}
+
+
+" Package": {{{
 
 let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
+let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.toml'
+
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/nvim/dein'))
 call dein#load_toml($MY_DEIN_TOML)
 
-"""local plugins
-if has('nvim')
-  if filereadable(expand("~/.nvimrc.plugin.local"))
-    source ~/.nvimrc.plugin.local
-  endif
-else
-  if filereadable(expand("~/.vimrc.plugin.local"))
-    source ~/.vimrc.plugin.local
-  endif
+if filereadable(expand($LOCAL_DEIN_TOML))
+  call dein#load_toml($LOCAL_DEIN_TOML)
 endif
 
 call dein#end()
@@ -24,6 +32,7 @@ filetype plugin indent on
 if dein#check_install()
   call dein#install()
 endif
+" }}}
 
 """ common
 
@@ -67,7 +76,7 @@ let g:quickrun_config['coffee'] = {
       \'exec' : ['%c -cbp %s']
       \}
 let g:quickrun_config['python'] = {
-      \'command' : 'python3'
+      \'command' : 'python'
       \}
 
 """"""""""""""c++"""""""""""""""""""""""""""""""
