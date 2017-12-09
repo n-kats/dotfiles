@@ -85,7 +85,7 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# export PATH="/usr/local/heroku/bin:$PATH"
 
 ### go
 export GOPATH=$HOME/.go
@@ -123,7 +123,10 @@ case ${OSTYPE} in
     # export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
     ### torch
-    . /home/user/git/torch/install/bin/torch-activate
+    # . /home/user/git/torch/install/bin/torch-activate
+
+    ### rust
+    source $HOME/.cargo/env
   ;;
 esac
 

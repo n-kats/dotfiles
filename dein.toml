@@ -168,6 +168,18 @@ on_ft = 'python'
 repo = 'zchee/deoplete-jedi'
 on_ft = 'python'
 
+# rust
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_add = '''
+  let g:rustfmt_autosave = 1
+'''
+
+[[plugins]]
+repo = 'racer-rust/vim-racer'
+on_ft = 'rust'
+
 # toml
 [[plugins]]
 repo = 'cespare/vim-toml'
@@ -198,3 +210,9 @@ on_ft = ['markdown', 'mkd']
 # [[plugins]]
 # repo = 'vim-scripts/CoqIDE'
 # on_ft = 'coq'
+
+# julia
+# [[plugins]]
+# repo = 'n-kats/julia-vim'
+# rev = 'latextounicode'
+# on_ft = 'julia'
