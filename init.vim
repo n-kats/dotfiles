@@ -1,4 +1,4 @@
-" Package: {{{1
+" Package": {{{
 
 let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
 let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.toml'
