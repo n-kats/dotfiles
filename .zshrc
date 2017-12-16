@@ -81,8 +81,12 @@ setopt extended_glob
 function history-all { history -E 1 }
 
 ############################
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+
+### anyenv
+if [ -d "$HOME/.anyenv/bin" ]; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+fi
 
 ### Added by the Heroku Toolbelt
 # export PATH="/usr/local/heroku/bin:$PATH"
@@ -126,7 +130,9 @@ case ${OSTYPE} in
     # . /home/user/git/torch/install/bin/torch-activate
 
     ### rust
-    source $HOME/.cargo/env
+    if [ -f $HOME/.cargo/env ]; then
+      source $HOME/.cargo/env
+    fi
   ;;
 esac
 
