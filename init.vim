@@ -38,22 +38,18 @@ endif
 
 set notitle "「Vimを使ってくれてありがとう」を消す
 set autoindent	"新しい行のインデントを現在行と同じにする
-if has('nvim')
-  set backupdir=$HOME/Documents/nvim/backup
-  set directory=$HOME/Documents/nvim/swap
-  set clipboard+=unnamedplus
-else
-  set backupdir=$HOME/Documents/vim/backup
-  ""バックアップファイルを作るディレクトリ
-  set directory=$HOME/Documents/vim/swap
-  ""スワップファイル用のディレクトリ
-  set clipboard=unnamed	"クリップボードを連携
-endif
+
+" set backupdir=$HOME/Documents/nvim/backup
+" set directory=$HOME/Documents/nvim/swap
+set clipboard+=unnamedplus
+
 set number
 set wildmenu 	" コマンドライン補完を便利に
 set mouse=a 	" 全モードでマウスを有効化
 set showmatch	" 括弧の対応をハイライト
 set smarttab
+
+set guicursor=
 
 inoremap <silent> jj <ESC>
 nmap <silent> <ESC><ESC> :noh<CR>
