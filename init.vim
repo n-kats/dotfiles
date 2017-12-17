@@ -16,7 +16,7 @@ endif
 " Package": {{{
 
 let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
-let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.toml'
+let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.local.toml'
 
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/nvim/dein'))
