@@ -198,6 +198,7 @@ else
 endif
 
 """ Alt+{h,j,k,l}でウィンドウ移動
+nnoremap <TAB> <C-w><C-w>
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
