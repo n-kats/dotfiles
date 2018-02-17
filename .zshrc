@@ -16,7 +16,7 @@ setopt re_match_pcre
 setopt prompt_subst
 # プロンプト指定
 PROMPT="[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
-%(?.%{$fg[green]%}.%{$fg[white]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
+%(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
 # プロンプト指定（コマンドの続き）
 PROMPT2='[%n]> '
 
@@ -144,5 +144,7 @@ fi
 
 export PATH="$HOME/bin:$PATH"
 
+alias sudo='sudo '
+alias c_='cd $_'
 alias :e=nvim
 alias :r="nvim -R"
