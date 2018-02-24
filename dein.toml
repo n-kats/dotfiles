@@ -38,6 +38,9 @@ repo = 'thinca/vim-quickrun'
 repo = 'vim-scripts/grep.vim'
 
 [[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
 repo = 'majutsushi/tagbar'
 
 [[plugins]]
@@ -134,13 +137,31 @@ repo = 'derekwyatt/vim-scala'
 on_ft = 'scala'
 
 # go
+# [[plugins]]
+# repo = "nsf/gocode"
+# on_ft = 'go'
+#
+# [[plugins]]
+# repo = "rogpeppe/godef"
+# on_ft = 'go'
+
 [[plugins]]
 repo = 'fatih/vim-go'
 on_ft = 'go'
+hook_add = '''
+let g:go_gocode_unimported_packages = 1
+" function! OnGo() abort
+"   autocmd InsertLeave <buffer> GoImports
+" endfunction
+" autocmd FileType go call OnGo()
+'''
 
 [[plugins]]
 repo = 'vim-jp/vim-go-extra'
 on_ft = 'go'
+
+# [[plugins]]
+# repo = 'neomake/neomake'
 
 [[plugins]]
 repo = 'zchee/deoplete-go'
