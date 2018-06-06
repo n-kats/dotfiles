@@ -84,9 +84,16 @@ let g:quickrun_config['coffee'] = {
       \'command' : 'cjsx',
       \'exec' : ['%c -cbp %s']
       \}
-let g:quickrun_config['python'] = {
+
+if s:is_pipenv_active
+  let g:quickrun_config['python'] = {
+      \'command' : 'pipenv run python'
+      \}
+else
+  let g:quickrun_config['python'] = {
       \'command' : 'python'
       \}
+endif
 
 """"""""""""""c++"""""""""""""""""""""""""""""""
 set cindent
