@@ -152,3 +152,6 @@ alias sudo='sudo '
 alias c_='cd $_'
 alias :e=nvim
 alias :r="nvim -R"
+alias pp='pipenv run'
+alias ppp='pipenv run python'
+alias ppip='pipenv run ipython'
