@@ -1,13 +1,24 @@
 " PythonPath": {{{
-if system('type pyenv &>/dev/null && echo -n 1')
-  let g:python_host_prog=""
-  if system('(pyenv version | grep system) &>/dev/null && echo -n 1')
-    let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim3/bin/python'
-  else
+
+let s:has_pipenv=system('type pipenv &>/dev/null && echo -n 1')
+let s:has_pyenv=system('type pyenv &>/dev/null && echo -n 1')
+
+let g:python_host_prog=""
+
+if s:has_pipenv
+  let s:is_pipenv_active=system('pipenv --where &>/dev/null && echo -n 1')
+endif
+
+if s:is_pipenv_active
+  let g:python3_host_prog=system('echo -n $(pipenv --py)')
+elseif s:has_pyenv
+  let s:is_not_pyenv_active=system('(pyenv version | grep system) &>/dev/null && echo -n 1')
+  if s:is_not_pyenv_active
     let g:python3_host_prog=system('echo -n $(which python)')
+  else
+    let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim3/bin/python'
   endif
 else
-  let g:python_host_prog=""
   let g:python3_host_prog=system('echo -n $(which python3)')
 endif
 " }}}
