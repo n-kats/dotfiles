@@ -87,7 +87,8 @@ let g:quickrun_config['coffee'] = {
 
 if s:is_pipenv_active
   let g:quickrun_config['python'] = {
-      \'command' : 'pipenv run python'
+      \'command' : 'pipenv',
+      \'exec': ['%c run python %s']
       \}
 else
   let g:quickrun_config['python'] = {
