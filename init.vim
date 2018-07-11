@@ -6,7 +6,7 @@ let s:has_pyenv=system('type pyenv &>/dev/null && echo -n 1')
 let g:python_host_prog=""
 
 if s:has_pipenv
-  let s:is_pipenv_active=system('pipenv --where &>/dev/null && echo -n 1')
+  let s:is_pipenv_active=system('pipenv --py &>/dev/null && echo -n 1')
 else
   let s:is_pipenv_active=
 endif

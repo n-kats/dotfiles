@@ -223,7 +223,12 @@ on_ft = 'help'
 [[plugins]]
 repo = 'rcmdnk/vim-markdown'
 on_ft = ['markdown', 'mkd']
-
+hook_add = '''
+  let g:vim_markdown_folding_disabled = 1
+  let g:vim_markdown_conceal = 0
+  let g:tex_conceal = ""
+  let g:vim_markdown_math = 1
+'''
 # coq
 # [[plugins]]
 # repo = 'jvoorhis/coq.vim'
