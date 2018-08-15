@@ -114,33 +114,11 @@ case ${OSTYPE} in
     ### Rust
     export PATH="$HOME/.cargo/bin:$PATH"
   ;;
-  linux*)
-    ### cuda
-    export PATH=/usr/local/cuda-9.1/bin${PATH:+:${PATH}}
-    export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-    export CUDA_HOME=/usr/local/cuda
-    export CUDA_PATH=/usr/local/cuda
-
-    ### cocos
-    # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-    # export COCOS_CONSOLE_ROOT=/home/user/git/cocos2d-x/tools/cocos2d-console/bin
-    # export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-    # Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-    # export COCOS_TEMPLATES_ROOT=/home/user/git/cocos2d-x/templates
-    # export PATH=$COCOS_TEMPLATES_ROOT:$PATH
-
-    ### torch
-    # . /home/user/git/torch/install/bin/torch-activate
-
-    ### rust
-    if [ -f $HOME/.cargo/env ]; then
-      source $HOME/.cargo/env
-    fi
-  ;;
 esac
 
-#export LD_LIBRARY_PATH="/usr/local/lib"
+if [ -f $HOME/.cargo/env ]; then
+  source $HOME/.cargo/env
+fi
 
 if [ -e "$HOME/.zshrc.local" ]; then
   source "$HOME/.zshrc.local"
