@@ -49,10 +49,6 @@ zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 	/usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
-zstyle ':completion:*' menu select interactive
-
-setopt menu_complete
-
 
 ############################
 
@@ -99,17 +95,12 @@ fi
 export GOPATH=$HOME/.go
 export PATH="$GOPATH/bin:$PATH"
 
-### FIXME
+###
 case ${OSTYPE} in
   darwin*)
     ### VIM
     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
-    ###
-
-    ### cling
-    # export CLING_PATH=~/tools/cling_2016-07-06_mac1011/bin
-    # export PATH=$CLING_PATH:$PATH
 
     ### Rust
     export PATH="$HOME/.cargo/bin:$PATH"
