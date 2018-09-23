@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#! /bin/bash
 unlink ~/.zshrc
 unlink ~/.vimrc
 unlink ~/.gvimrc

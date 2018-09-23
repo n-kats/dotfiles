@@ -1,8 +1,8 @@
-#!/usr/bin/env sh
+#! /bin/bash
+cd `dirname $0`
+
 mkdir -p ~/.config/nvim
-# ln -sf ~/git/dotfiles/.vimrc ~/.vimrc
-ln -sf ~/git/dotfiles/.gvimrc ~/.gvimrc
-ln -sf ~/git/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/git/dotfiles/.editorconfig ~/.editorconfig
-ln -sf ~/git/dotfiles/init.vim ~/.config/nvim/init.vim
-ln -sf ~/git/dotfiles/dein.toml ~/.config/nvim/dein.toml
+ln -sf `pwd`/.zshrc ~/.zshrc
+ln -sf `pwd`/.editorconfig ~/.editorconfig
+ln -sf `pwd`/init.vim ~/.config/nvim/init.vim
+ln -sf `pwd`/dein.toml ~/.config/nvim/dein.toml
