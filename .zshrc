@@ -88,8 +88,8 @@ if [ -d "$HOME/.anyenv/bin" ]; then
   eval "$(anyenv init -)"
 fi
 
-### Added by the Heroku Toolbelt
-# export PATH="/usr/local/heroku/bin:$PATH"
+### pipenv
+export PIPENV_COLORBLIND=1  # pipenvの色を無効化
 
 ### go
 export GOPATH=$HOME/.go
@@ -122,5 +122,7 @@ alias c_='cd $_'
 alias :e=nvim
 alias :r="nvim -R"
 alias pp='pipenv run'
+alias pps='pipenv shell'
 alias ppp='pipenv run python'
+alias ppm='pipenv run python -m'
 alias ppip='pipenv run ipython'
