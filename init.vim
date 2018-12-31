@@ -8,7 +8,7 @@ let g:python_host_prog=""
 if s:has_pipenv
   let s:is_pipenv_active=system('pipenv --venv &>/dev/null && echo -n 1')
 else
-  let s:is_pipenv_active=
+  let s:is_pipenv_active=0
 endif
 
 if s:is_pipenv_active
