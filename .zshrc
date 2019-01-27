@@ -41,6 +41,7 @@ zstyle ':zle:*' word-style unspecified
 
 ############################
 fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(~/.zsh/completion $fpath)
 
 autoload -Uz compinit && compinit -u
 
