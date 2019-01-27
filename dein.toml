@@ -27,7 +27,8 @@ repo = 'Shougo/unite.vim'
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
-
+[[plugins]]
+repo = 'Shougo/defx.nvim'
 [[plugins]]
 repo = 'mattn/sonictemplate-vim'
 
