@@ -216,6 +216,9 @@ let g:indentLine_fileTypeExclude = ['help']
 set list lcs=tab:\|\ ""
 let g:indentLine_color_term = 239
 
+""" vue.js
+autocmd BufRead,BufNewFile *.vue setfiletype vue
+
 """ vimrc.local
 if has('nvim')
   if filereadable(expand("~/.nvimrc.local"))

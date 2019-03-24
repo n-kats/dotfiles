@@ -116,6 +116,10 @@ if [ -e "$HOME/.zshrc.local" ]; then
   source "$HOME/.zshrc.local"
 fi
 
+if [ -d "$HOME/.yarn/bin" ]; then
+  export PATH="$HOME/.yarn/bin:$PATH"
+fi
+
 export PATH="$HOME/bin:$PATH"
 
 alias sudo='sudo '
