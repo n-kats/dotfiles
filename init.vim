@@ -66,6 +66,7 @@ set guicursor=
 
 inoremap <silent> jj <ESC>
 nmap <silent> <ESC><ESC> :noh<CR>
+colorscheme desert
 
 """"""""""""quickrun""""""""""""""""""""""""""""""
 let g:quickrun_config={'*': {'split': ''}}
@@ -90,11 +91,19 @@ if s:is_pipenv_active
       \'command' : 'pipenv',
       \'exec': ['%c run python %s']
       \}
+  let g:quickrun_config['yaml'] = {
+      \'command' : 'pipenv',
+      \'exec': ['%c run yq . %s']
+      \}
 else
   let g:quickrun_config['python'] = {
       \'command' : 'python'
       \}
+  let g:quickrun_config['yaml'] = {
+      \'command' : 'yq'
+      \}
 endif
+
 
 """"""""""""""c++"""""""""""""""""""""""""""""""
 set cindent

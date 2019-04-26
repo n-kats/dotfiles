@@ -119,11 +119,15 @@ fi
 export PATH="$HOME/bin:$PATH"
 
 alias sudo='sudo '
-alias c_='cd $_'
+alias c_='cd $-'
 alias :e=nvim
 alias :r="nvim -R"
 alias pp='pipenv run'
 alias pps='pipenv shell'
 alias ppp='pipenv run python'
+alias psh='pipenv run bash'
 alias ppm='pipenv run python -m'
+alias ppu='pipenv run python -m unittest'
 alias ppip='pipenv run ipython'
+alias xopen='xdg-open'
+alias e_sh='exec $SHELL -l'
