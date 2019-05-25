@@ -66,7 +66,7 @@ set guicursor=
 
 inoremap <silent> jj <ESC>
 nmap <silent> <ESC><ESC> :noh<CR>
-colorscheme desert
+colorscheme zellner
 
 """"""""""""quickrun""""""""""""""""""""""""""""""
 let g:quickrun_config={'*': {'split': ''}}
