@@ -19,13 +19,14 @@ ln -sf `pwd`/dein.toml ~/.config/nvim/dein.toml
 # anyenv
 ANYENV_ROOT=~/.anyenv
 ANYENV_PLUGINS=~/.anyenv/plugins
-DOES_UPDATA_ANYENV=0
 ANYENV=~/.anyenv/bin/anyenv
 PYENV=~/.anyenv/envs/pyenv/bin/pyenv
 
 if [ ! -e $ANYENV_ROOT ]; then
   git clone https://github.com/anyenv/anyenv $ANYENV_ROOT
-  $ANYENV install --init
+  yes | $ANYENV install --init
+  eval "$($ANYENV init -)"
+  $ANYENV install pyenv
   eval "$($ANYENV init -)"
 fi
 
@@ -34,11 +35,8 @@ if [ ! -e $ANYENV_PLUGINS ]; then
 fi
 
 if [ ! -e $ANYENV_PLUGINS/anyenv-update ]; then
+  mkdir -p $ANYENV_PLUGINS
   git clone https://github.com/znz/anyenv-update.git $ANYENV_PLUGINS/anyenv-update
-fi
-
-if [ ! -e $PYENV ]; then
-  $ANYENV install pyenv
 fi
 
 if [ ! $($PYENV versions | grep 3.7.3 > /dev/null && echo 1) ]; then
