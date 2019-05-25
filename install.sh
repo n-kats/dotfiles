@@ -1,4 +1,5 @@
 #! /bin/bash
+set -eu
 cd `dirname $0`
 
 # zsh
@@ -19,9 +20,13 @@ ln -sf `pwd`/dein.toml ~/.config/nvim/dein.toml
 ANYENV_ROOT=~/.anyenv
 ANYENV_PLUGINS=~/.anyenv/plugins
 DOES_UPDATA_ANYENV=0
+ANYENV=~/.anyenv/bin/anyenv
+PYENV=~/.anyenv/envs/pyenv/bin/pyenv
 
 if [ ! -e $ANYENV_ROOT ]; then
   git clone https://github.com/anyenv/anyenv $ANYENV_ROOT
+  $ANYENV install --init
+  eval "$($ANYENV init -)"
 fi
 
 if [ ! -e $ANYENV_PLUGINS ]; then
@@ -32,15 +37,12 @@ if [ ! -e $ANYENV_PLUGINS/anyenv-update ]; then
   git clone https://github.com/znz/anyenv-update.git $ANYENV_PLUGINS/anyenv-update
 fi
 
-anyenv init
-
-if [ ! $(which pyenv > /dev/null && echo -n 1) ]; then
-  anyenv install pyenv
-  anyenv init
+if [ ! -e $PYENV ]; then
+  $ANYENV install pyenv
 fi
 
-if [ ! $(pyenv versions | grep 3.7.3 > /dev/null && echo 1) ]; then
-  pyenv install 3.7.3
+if [ ! $($PYENV versions | grep 3.7.3 > /dev/null && echo 1) ]; then
+  $PYENV install 3.7.3
 fi
 
 ./update.sh
