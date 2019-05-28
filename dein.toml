@@ -63,7 +63,7 @@ repo = 'vim-scripts/grep.vim'
 repo = 'w0rp/ale'
 hook_add = '''
   let g:ale_fixers = {'python': ['autopep8', 'yapf']}
-  let g:ale_fix_on_save = 1
+  let g:ale_fix_on_save = !filereadable(".not_autofix")
   if filereadable("setup.cfg")
     let g:ale_python_pylint_options = "--rcfile setup.cfg"
   else
