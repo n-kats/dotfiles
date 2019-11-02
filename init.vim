@@ -1,65 +1,67 @@
 " PythonPath": {{{
 
-let s:has_pipenv=system('type pipenv &>/dev/null && echo -n 1')
-let s:has_pyenv=system('type pyenv &>/dev/null && echo -n 1')
+let s:has_pipenv = system('type pipenv &>/dev/null && echo -n 1')
+let s:has_pyenv = system('type pyenv &>/dev/null && echo -n 1')
 
-let g:python_host_prog=""
+let g:python_host_prog = ""
 
 if s:has_pipenv
-  let s:is_pipenv_active=system('pipenv --venv &>/dev/null && echo -n 1')
+  let g:is_pipenv_active = system('pipenv --venv &>/dev/null && echo -n 1')
 else
-  let s:is_pipenv_active=0
+  let g:is_pipenv_active = 0
 endif
 
-if s:is_pipenv_active
-  let g:python3_host_prog=system('echo -n $(pipenv --py)')
-elseif s:has_pyenv
-  let s:is_not_pyenv_active=system('(pyenv version | grep system) &>/dev/null && echo -n 1')
-  if s:is_not_pyenv_active
-    let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim3/bin/python'
-  else
-    let g:python3_host_prog=system('echo -n $(which python)')
-  endif
+let s:is_pyenv_system = s:has_pyenv ? system('(pyenv version | grep system) &>/dev/null && echo -n 1') : 0
+
+let s:python_path_pipenv = g:is_pipenv_active ? system('echo -n $(pipenv --py)') : ""
+let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? system('which python') : ""
+let s:python_path_python3 = system('which python3')
+
+if s:python_path_pyenv
+  let g:python3_host_prog = s:python_path_pyenv
 else
-  let g:python3_host_prog=system('echo -n $(which python3)')
+  let g:python3_host_prog = s:python_path_python3
 endif
+
 " }}}
-
 
 " Package": {{{
 
 let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
 let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.local.toml'
-
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
-call dein#begin(expand('~/.cache/nvim/dein'))
-call dein#load_toml($MY_DEIN_TOML)
 
-if filereadable(expand($LOCAL_DEIN_TOML))
-  call dein#load_toml($LOCAL_DEIN_TOML)
+if isdirectory(expand('~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim'))
+  call dein#begin(expand('~/.cache/nvim/dein'))
+  call dein#load_toml($MY_DEIN_TOML)
+
+  if filereadable(expand($LOCAL_DEIN_TOML))
+    call dein#load_toml($LOCAL_DEIN_TOML)
+  endif
+
+  call dein#end()
+
+  filetype plugin indent on
+  if dein#check_install()
+    call dein#install()
+  endif
+else
+  echo s:dein_path 'does not exist.'
 endif
 
-call dein#end()
-
-filetype plugin indent on
-if dein#check_install()
-  call dein#install()
-endif
 " }}}
 
-""" common
+" common": {{{
 
-set notitle "「Vimを使ってくれてありがとう」を消す
-set autoindent	"新しい行のインデントを現在行と同じにする
+set notitle  "「Vimを使ってくれてありがとう」を消す
+set autoindent  "新しい行のインデントを現在行と同じにする
 
-" set backupdir=$HOME/Documents/nvim/backup
-" set directory=$HOME/Documents/nvim/swap
 set clipboard+=unnamedplus
 
 set number
-set wildmenu 	" コマンドライン補完を便利に
-set mouse=a 	" 全モードでマウスを有効化
-set showmatch	" 括弧の対応をハイライト
+set wildmenu " コマンドライン補完を便利に
+set mouse=a " 全モードでマウスを有効化
+set showmatch " 括弧の対応をハイライト
 set tabstop=4
 set shiftwidth=4
 set smarttab
@@ -70,47 +72,54 @@ inoremap <silent> jj <ESC>
 nmap <silent> <ESC><ESC> :noh<CR>
 colorscheme zellner
 
-""""""""""""quickrun""""""""""""""""""""""""""""""
-let g:quickrun_config={'*': {'split': ''}}
-set splitright
-let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
-
-let g:quickrun_config['cuda'] = {
-      \'command' : 'nvcc',
-      \}
-let g:quickrun_config['cpp'] = {
-      \'command' : 'g++',
-      \'cmdopt' : '-std=c++14',
-      \}
-"cjsxでcoffeeを処理する
-let g:quickrun_config['coffee'] = {
-      \'command' : 'cjsx',
-      \'exec' : ['%c -cbp %s']
-      \}
-
-if s:is_pipenv_active
-  let g:quickrun_config['python'] = {
-      \'command' : 'pipenv',
-      \'exec': ['%c run python %s']
-      \}
-  let g:quickrun_config['yaml'] = {
-      \'command' : 'pipenv',
-      \'exec': ['%c run yq . %s']
-      \}
-else
-  let g:quickrun_config['python'] = {
-      \'command' : 'python'
-      \}
-  let g:quickrun_config['yaml'] = {
-      \'command' : 'yq'
-      \}
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
 endif
 
+" }}}
 
-""""""""""""""c++"""""""""""""""""""""""""""""""
+" ウィンドウ移動": {{{
+""" Alt+{h,j,k,l}でウィンドウ移動
+nnoremap <TAB> <C-w><C-w>
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+if has('nvim')
+  tnoremap <ESC> <C-\><C-n>
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
+  syntax on
+endif
+" }}}
+
+" statusline": {{{
+set laststatus=2
+set statusline+=%r "ReadOnly?
+set statusline+=%y "ファイルタイプ表示
+set statusline+=%f "ファイル名
+set statusline+=%m "Modified?
+set statusline+=%= "これより右詰め
+set statusline+=[%P,%c]
+set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}] "文字コード表示
+"}}}
+
+" c++": {{{
 set cindent
 set cinoptions=g-1
-""""""""""""""vim-latex"""""""""""""""""""""""""""""""""""""""
+" }}}
+
+" python": {{{
+autocmd FileType python let b:did_ftplugin = 1
+" }}}
+
+" vue.js": {{{
+autocmd BufRead,BufNewFile *.vue setfiletype vue
+" }}}
+
+" tex": {{{
 let g:tex_conceal='' "うざい式表示を滅ぼす
 if expand("%:e") == "tex"
   if has('win32')
@@ -161,67 +170,9 @@ if expand("%:e") == "tex"
     let g:Tex_ViewRule_pdf = 'xdg-open'
   endif
 endif
+" }}}
 
-""""""""""""""""""""""""""""""
-" set cursorline
-
-""" statusline
-set laststatus=2
-set statusline+=%r "ReadOnly?
-set statusline+=%y "ファイルタイプ表示
-set statusline+=%f "ファイル名
-set statusline+=%m "Modified?
-set statusline+=%= "これより右詰め
-set statusline+=[%P,%c]
-set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}] "文字コード表示
-
-
-""" python
-autocmd FileType python let b:did_ftplugin = 1
-
-""" json
-let g:vim_json_syntax_conceal = 0
-
-""" neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-let g:neosnippet#snippets_directory='~/snippets/neosnippet'
-
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-""" sonictemplate
-let g:sonictemplate_vim_template_dir = [
-      \ '~/git/template'
-      \]
-
-""" vimfiler
-nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
-let g:vimfiler_as_default_explorer=1
-let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
-
-""" tagbar
-nnoremap <leader>t :TagbarToggle<CR>
-
-""" indentLine
-let g:indentLine_fileTypeExclude = ['help']
-set list lcs=tab:\|\ ""
-let g:indentLine_color_term = 239
-
-""" vue.js
-autocmd BufRead,BufNewFile *.vue setfiletype vue
-
-""" vimrc.local
+" vimrc.local": {{{
 if has('nvim')
   if filereadable(expand("~/.nvimrc.local"))
     source ~/.nvimrc.local
@@ -231,18 +182,4 @@ else
     source ~/.vimrc.local
   endif
 endif
-
-""" Alt+{h,j,k,l}でウィンドウ移動
-nnoremap <TAB> <C-w><C-w>
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-if has('nvim')
-  tnoremap <ESC> <C-\><C-n>
-  tnoremap <A-h> <C-\><C-n><C-w>h
-  tnoremap <A-j> <C-\><C-n><C-w>j
-  tnoremap <A-k> <C-\><C-n><C-w>k
-  tnoremap <A-l> <C-\><C-n><C-w>l
-  syntax on
-endif
+" }}}
