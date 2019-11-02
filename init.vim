@@ -60,6 +60,8 @@ set number
 set wildmenu 	" コマンドライン補完を便利に
 set mouse=a 	" 全モードでマウスを有効化
 set showmatch	" 括弧の対応をハイライト
+set tabstop=4
+set shiftwidth=4
 set smarttab
 
 set guicursor=
