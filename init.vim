@@ -14,10 +14,10 @@ endif
 let s:is_pyenv_system = s:has_pyenv ? system('(pyenv version | grep system) &>/dev/null && echo -n 1') : 0
 
 let s:python_path_pipenv = g:is_pipenv_active ? system('echo -n $(pipenv --py)') : ""
-let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? system('which python') : ""
-let s:python_path_python3 = system('which python3')
+let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? substitute(system('readlink -f `pyenv which python`'), '\n', '', 'g') : ""
+let s:python_path_python3 = system('echo -n $(which python3)')
 
-if s:python_path_pyenv
+if s:has_pyenv && ! s:is_pyenv_system
   let g:python3_host_prog = s:python_path_pyenv
 else
   let g:python3_host_prog = s:python_path_python3
