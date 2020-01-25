@@ -16,6 +16,10 @@ fi
 ln -sf `pwd`/init.vim ~/.config/nvim/init.vim
 ln -sf `pwd`/dein.toml ~/.config/nvim/dein.toml
 
+# procs
+mkdir -p ~/.config/procs
+ln -sf `pwd`/procs/config.toml ~/.config/procs/config.toml
+
 # anyenv
 ANYENV_ROOT=~/.anyenv
 ANYENV_PLUGINS=~/.anyenv/plugins

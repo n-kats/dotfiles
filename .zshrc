@@ -1,4 +1,5 @@
 export LANG=ja_JP.UTF-8
+export LC_CTYPE=en_US.UTF-8
 # 色
 autoload -Uz colors
 colors
