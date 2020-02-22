@@ -3,8 +3,6 @@
 let s:has_pipenv = system('type pipenv &>/dev/null && echo -n 1')
 let s:has_pyenv = system('type pyenv &>/dev/null && echo -n 1')
 
-let g:python_host_prog = ""
-
 if s:has_pipenv
   let g:is_pipenv_active = system('pipenv --venv &>/dev/null && echo -n 1')
 else
@@ -14,10 +12,12 @@ endif
 let s:is_pyenv_system = s:has_pyenv ? system('(pyenv version | grep system) &>/dev/null && echo -n 1') : 0
 
 let s:python_path_pipenv = g:is_pipenv_active ? system('echo -n $(pipenv --py)') : ""
-let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? substitute(system('readlink -f `pyenv which python`'), '\n', '', 'g') : ""
+let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? substitute(system('readlink -f `which python`'), '\n', '', 'g') : ""
 let s:python_path_python3 = system('echo -n $(which python3)')
 
-if s:has_pyenv && ! s:is_pyenv_system
+if g:is_pipenv_active
+  let g:python3_host_prog = s:python_path_pipenv
+elseif s:has_pyenv && ! s:is_pyenv_system
   let g:python3_host_prog = s:python_path_pyenv
 else
   let g:python3_host_prog = s:python_path_python3
