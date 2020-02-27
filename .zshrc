@@ -92,6 +92,9 @@ fi
 
 ### pipenv
 export PIPENV_COLORBLIND=1  # pipenvの色を無効化
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
 
 ### go
 export GOPATH=$HOME/.go

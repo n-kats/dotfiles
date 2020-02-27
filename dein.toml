@@ -278,7 +278,7 @@ hook_add = '''
         \   }
         \ }})
     nmap K :<C-u>LspHover<CR>
-    " nmap <Leader>R :<C-u>LspRename<CR>
+    nmap <Leader>R :<C-u>LspRename<CR>
     nmap <Leader>d :<C-u>LspDefinition<CR>
     nmap <Leader>n :<C-u>LspReferences<CR>
   endif
