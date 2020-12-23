@@ -57,6 +57,10 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'tbodt/deoplete-tabnine'
+build = "./install.sh"
+
+[[plugins]]
 repo = 'Shougo/unite.vim'
 
 [[plugins]]
@@ -108,7 +112,8 @@ else
       \'command' : 'python'
       \}
   let g:quickrun_config['yaml'] = {
-      \'command' : 'yq'
+      \'command' : 'yq',
+      \'exec': ['%c . %s']
       \}
 endif
 '''

@@ -139,3 +139,4 @@ alias ppu='pipenv run python -m unittest'
 alias ppip='pipenv run ipython'
 alias xopen='xdg-open'
 alias e_sh='exec $SHELL -l'
+bindkey -v

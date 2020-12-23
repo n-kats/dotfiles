@@ -104,7 +104,7 @@ set statusline+=%m "Modified?
 set statusline+=%= "これより右詰め
 set statusline+=[%P,%c]
 set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}] "文字コード表示
-"}}}
+" }}}
 
 " c++": {{{
 set cindent
