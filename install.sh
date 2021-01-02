@@ -43,8 +43,8 @@ if [ ! -e $ANYENV_PLUGINS/anyenv-update ]; then
   git clone https://github.com/znz/anyenv-update.git $ANYENV_PLUGINS/anyenv-update
 fi
 
-if [ ! $($PYENV versions | grep 3.7.3 > /dev/null && echo 1) ]; then
-  $PYENV install 3.7.3
+if [ ! $($PYENV versions | grep 3.8.5 > /dev/null && echo 1) ]; then
+  $PYENV install 3.8.5
 fi
 
 ./update.sh

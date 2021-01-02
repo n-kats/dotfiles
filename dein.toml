@@ -75,6 +75,12 @@ let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
 # repo = 'Shougo/defx.nvim'
 
 [[plugins]]
+repo = 'lambdalisue/fern.vim'
+
+[[plugins]]  # fern 用
+repo = 'antoinemadec/FixCursorHold.nvim'
+
+[[plugins]]
 repo = 'mattn/sonictemplate-vim'
 hook_add = '''
 let g:sonictemplate_vim_template_dir = [
@@ -194,6 +200,10 @@ let g:vim_json_syntax_conceal = 0
 # javascript
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
+on_ft = 'typescript'
+
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
 on_ft = 'typescript'
 
 [[plugins]]
