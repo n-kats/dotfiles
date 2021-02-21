@@ -65,6 +65,8 @@ set showmatch " 括弧の対応をハイライト
 set tabstop=4
 set shiftwidth=4
 set smarttab
+set spelllang+=cjk " 日本語部分までスペルチェックされるのを除去
+set spell " spell check
 
 set guicursor=
 

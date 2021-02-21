@@ -43,7 +43,7 @@ zstyle ':zle:*' word-style unspecified
 ############################
 fpath=(/usr/local/share/zsh-completions $fpath)
 fpath=(~/.zsh/completion $fpath)
-
+fpath=(~/.zfunc $fpath)
 autoload -Uz compinit && compinit -u
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -96,6 +96,15 @@ if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
 fi
 
+### poetry
+if [[ -e $HOME/.poetry/bin ]]; then
+  export PATH="$HOME/.poetry/bin:$PATH"
+fi
+if type poetry > /dev/null 2>&1; then
+  mkdir -p $HOME/.zfunc
+  poetry completions zsh > $HOME/.zfunc/_poetry
+fi
+
 ### go
 export GOPATH=$HOME/.go
 export PATH="$GOPATH/bin:$PATH"
@@ -138,7 +147,9 @@ alias ppm='pipenv run python -m'
 alias ppu='pipenv run python -m unittest'
 alias ppip='pipenv run ipython'
 alias pos='poetry shell'
+alias por='poetry run'
 alias posip='poetry run ipython'
+alias posh='poetry run bash'
 alias xopen='xdg-open'
 alias e_sh='exec $SHELL -l'
 bindkey -v

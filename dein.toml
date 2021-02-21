@@ -154,11 +154,11 @@ hook_add = '''
 nnoremap <leader>t :TagbarToggle<CR>
 '''
 
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
-hook_add = '''
-  let g:EditorConfig_core_mode = 'external_command'
-'''
+# [[plugins]]
+# repo = 'editorconfig/editorconfig-vim'
+# hook_add = '''
+#   let g:EditorConfig_core_mode = 'external_command'
+# '''
 
 # html
 [[plugins]]
