@@ -3,28 +3,21 @@
 let s:has_pipenv = system('type pipenv &>/dev/null && echo -n 1')
 let s:has_pyenv = system('type pyenv &>/dev/null && echo -n 1')
 let s:has_poetry = system('type poetry &>/dev/null && echo -n 1')
+let s:has_pyenv_poetry = s:has_pyenv && system('pyenv prefix poetry &>/dev/null && echo -n 1')
 
-if s:has_poetry
-  let g:is_poetry_active = system('poetry check &>/dev/null && echo -n 1')
-else
-  let g:is_poetry_active = 0
-endif
-
-if s:has_pipenv && ! g:is_poetry_active
-  let g:is_pipenv_active = system('pipenv --venv &>/dev/null && echo -n 1')
-else
-  let g:is_pipenv_active = 0
-endif
-
+let g:is_poetry_active = s:has_poetry && system('poetry check &>/dev/null && echo -n 1')
+let g:is_pipenv_active = s:has_pipenv && ! g:is_poetry_active && system('pipenv --venv &>/dev/null && echo -n 1')
+let s:is_pyenv_poetry_active = s:has_pyenv_poetry && g:is_poetry_active
 let s:is_pyenv_system = s:has_pyenv ? system('(pyenv version | grep system) &>/dev/null && echo -n 1') : 0
 
 let s:python_path_poetry = g:is_poetry_active ? system('echo -n $(poetry run which python)') : ""
 let s:python_path_pipenv = g:is_pipenv_active ? system('echo -n $(pipenv --py)') : ""
-let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? substitute(system('readlink -f `pyenv which python`'), '\n', '', 'g') : ""
+let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? substitute(system('readlink -f $(pyenv which python)'), '\n', '', 'g') : ""
+let s:python_path_pyenv_poetry = s:is_pyenv_poetry_active ? system('echo -n $(pyenv prefix poetry)/bin/python') : ""
 let s:python_path_python3 = system('echo -n $(which python3)')
 
-if g:is_poetry_active
-  let g:python3_host_prog = s:python_path_pyenv
+if s:is_pyenv_poetry_active
+  let g:python3_host_prog = s:python_path_pyenv_poetry
 elseif g:is_pipenv_active
   let g:python3_host_prog = s:python_path_pyenv
 elseif s:has_pyenv && ! s:is_pyenv_system

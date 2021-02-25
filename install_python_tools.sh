@@ -53,7 +53,7 @@ EOS
 # poetry
 setup poetry \
   3.8.5 \
-  poetry
+  poetry pynvim python-language-server
 
 add_command poetry poetry zsh
 
