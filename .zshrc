@@ -155,3 +155,8 @@ alias posh='poetry run bash'
 alias xopen='xdg-open'
 alias e_sh='exec $SHELL -l'
 bindkey -v
+
+pyenv_poetry()
+{
+  poetry env use "$(pyenv prefix $1)/bin/python"
+}
