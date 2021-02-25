@@ -113,6 +113,15 @@ if g:is_pipenv_active
       \'command' : 'pipenv',
       \'exec': ['%c run yq . %s']
       \}
+elseif g:is_poetry_active
+  let g:quickrun_config['python'] = {
+      \'command' : 'poetry',
+      \'exec': ['%c run python %s']
+      \}
+  let g:quickrun_config['yaml'] = {
+      \'command' : 'poetry',
+      \'exec': ['%c run yq . %s']
+      \}
 else
   let g:quickrun_config['python'] = {
       \'command' : 'python'
