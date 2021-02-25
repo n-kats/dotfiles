@@ -100,10 +100,6 @@ fi
 if [[ -e $HOME/.poetry/bin ]]; then
   export PATH="$HOME/.poetry/bin:$PATH"
 fi
-if type poetry > /dev/null 2>&1; then
-  mkdir -p $HOME/.zfunc
-  poetry completions zsh > $HOME/.zfunc/_poetry
-fi
 
 ### go
 export GOPATH=$HOME/.go
@@ -134,6 +130,12 @@ if [ -d "$HOME/.yarn/bin" ]; then
 fi
 
 export PATH="$HOME/bin:$PATH"
+# 補間
+## poetory
+if type poetry > /dev/null 2>&1; then
+  mkdir -p $HOME/.zfunc
+  poetry completions zsh > $HOME/.zfunc/_poetry
+fi
 
 alias sudo='sudo '
 alias c_='cd $-'

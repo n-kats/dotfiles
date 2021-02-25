@@ -24,7 +24,7 @@ let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? substitute(syst
 let s:python_path_python3 = system('echo -n $(which python3)')
 
 if g:is_poetry_active
-  let g:python3_host_prog = s:python_path_poetry
+  let g:python3_host_prog = s:python_path_pyenv
 elseif g:is_pipenv_active
   let g:python3_host_prog = s:python_path_pyenv
 elseif s:has_pyenv && ! s:is_pyenv_system
