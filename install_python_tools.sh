@@ -53,9 +53,10 @@ EOS
 # poetry
 setup poetry \
   3.8.5 \
-  poetry pynvim python-language-server
+  poetry pynvim python-language-server poetry-dynamic-versioning
 
 add_command poetry poetry zsh
+add_command poetry-dynamic-versioning poetry zsh
 
 # igraph
 if [[ "$IGRAPH" != "" ]]; then
