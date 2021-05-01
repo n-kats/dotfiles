@@ -62,7 +62,7 @@ add_command poetry-dynamic-versioning poetry zsh
 if [[ "$IGRAPH" != "" ]]; then
 setup igraph \
   3.8.5 \
-  $IGRAPH
+  $IGRAPH pynvim python-language-server
 add_command igraph igraph zsh
 add_command_update igraph zsh $IGRAPH
 fi

@@ -108,12 +108,8 @@ export PATH="$GOPATH/bin:$PATH"
 ###
 case ${OSTYPE} in
   darwin*)
-    ### VIM
     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
-
-    ### Rust
-    export PATH="$HOME/.cargo/bin:$PATH"
   ;;
 esac
 
@@ -152,11 +148,15 @@ alias pos='poetry shell'
 alias por='poetry run'
 alias posip='poetry run ipython'
 alias posh='poetry run bash'
-alias xopen='xdg-open'
 alias e_sh='exec $SHELL -l'
 bindkey -v
 
 pyenv_poetry()
 {
   poetry env use "$(pyenv prefix $1)/bin/python"
+}
+
+xopen()
+{
+  xdg-open "$1" 2>/dev/null
 }
