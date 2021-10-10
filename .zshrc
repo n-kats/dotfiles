@@ -49,7 +49,7 @@ autoload -Uz compinit && compinit -u
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-	/usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+  /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 ############################
@@ -61,8 +61,8 @@ zstyle ':vcs_info:*' formats '%F{green}{%s}-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}{%s}-[%b|%a]%f'
 
 function _update_vcs_info_msg() {
-	LANG=en_US.UTF-8 vcs_info
-	RPROMPT="${vcs_info_msg_0_}"
+  LANG=en_US.UTF-8 vcs_info
+  RPROMPT="${vcs_info_msg_0_}"
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
@@ -105,14 +105,7 @@ fi
 export GOPATH=$HOME/.go
 export PATH="$GOPATH/bin:$PATH"
 
-###
-case ${OSTYPE} in
-  darwin*)
-    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-    alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
-  ;;
-esac
-
+### rust
 if [ -f $HOME/.cargo/env ]; then
   source $HOME/.cargo/env
 fi
@@ -125,15 +118,16 @@ if [ -d "$HOME/.yarn/bin" ]; then
   export PATH="$HOME/.yarn/bin:$PATH"
 fi
 
-export PATH="$HOME/bin:$PATH"
 # 補間
 ## poetory
 if [ ! -e "$HOME/.zfunc/_poetry" ] ; then
-	if type poetry > /dev/null 2>&1; then
-  mkdir -p $HOME/.zfunc
-  poetry completions zsh > $HOME/.zfunc/_poetry
-	fi
+  if type poetry > /dev/null 2>&1; then
+    mkdir -p $HOME/.zfunc
+    poetry completions zsh > $HOME/.zfunc/_poetry
+  fi
 fi
+
+export PATH="$HOME/bin:$PATH"
 
 alias sudo='sudo '
 alias c_='cd $-'
