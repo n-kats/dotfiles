@@ -33,7 +33,7 @@ endif
 let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
 let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.local.toml'
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
-
+let g:dein#types#git#default_protocol = 'ssh'
 if isdirectory(expand('~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim'))
   call dein#begin(expand('~/.cache/nvim/dein'))
   call dein#load_toml($MY_DEIN_TOML)
