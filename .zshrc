@@ -128,9 +128,11 @@ fi
 export PATH="$HOME/bin:$PATH"
 # 補間
 ## poetory
-if type poetry > /dev/null 2>&1; then
+if [ ! -e "$HOME/.zfunc/_poetry" ] ; then
+	if type poetry > /dev/null 2>&1; then
   mkdir -p $HOME/.zfunc
   poetry completions zsh > $HOME/.zfunc/_poetry
+	fi
 fi
 
 alias sudo='sudo '

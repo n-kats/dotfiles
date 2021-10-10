@@ -12,10 +12,10 @@ let s:is_pyenv_system = s:has_pyenv ? system('(pyenv version | grep system) &>/d
 
 let s:python_path_poetry = g:is_poetry_active ? system('echo -n $(poetry run which python)') : ""
 let s:python_path_pipenv = g:is_pipenv_active ? system('echo -n $(pipenv --py)') : ""
-let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? substitute(system('readlink -f $(pyenv which python)'), '\n', '', 'g') : ""
+let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? system('echo -n $(pyenv prefix)/bin/python') : ""
 let s:python_path_pyenv_poetry = s:is_pyenv_poetry_active ? system('echo -n $(pyenv prefix poetry)/bin/python') : ""
 let s:python_path_python3 = system('echo -n $(which python3)')
-
+let g:is_pyenv_system = s:is_pyenv_system
 if s:is_pyenv_poetry_active
   let g:python3_host_prog = s:python_path_pyenv_poetry
 elseif g:is_pipenv_active

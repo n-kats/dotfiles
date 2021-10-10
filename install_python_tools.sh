@@ -19,9 +19,9 @@ setup()
     echo "[I] ${name} is installed."
   fi
   pyenv shell "$name"
-  pip install -U pip setuptools
-  echo "[I] install ${@}."
-  pip install -U "$@"
+  python -m pip install -U pip setuptools
+  echo "[I] install $@."
+  python -m pip install -U $*
   echo "[I] done."
 }
 
@@ -32,9 +32,9 @@ add_command()
   shell_="$3"
   cat <<EOS > "$HOME/bin/$command"
 #! /bin/${shell_}
-eval "\$(pyenv init -)"
+eval "\$(pyenv init --path)"
 pyenv shell "$env_"
-$command \$*
+pyenv exec $command \$*
 EOS
 }
 
@@ -52,7 +52,7 @@ EOS
 }
 # poetry
 setup poetry \
-  3.8.5 \
+  3.8.12 \
   poetry pynvim python-language-server poetry-dynamic-versioning
 
 add_command poetry poetry zsh
@@ -61,7 +61,7 @@ add_command poetry-dynamic-versioning poetry zsh
 # igraph
 if [[ "$IGRAPH" != "" ]]; then
 setup igraph \
-  3.8.5 \
+  3.8.12 \
   $IGRAPH pynvim python-language-server
 add_command igraph igraph zsh
 add_command_update igraph zsh $IGRAPH
