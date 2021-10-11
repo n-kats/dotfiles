@@ -32,7 +32,7 @@ add_command()
   shell_="$3"
   cat <<EOS > "$HOME/bin/$command"
 #! /bin/${shell_}
-eval "\$(pyenv init --path)"
+eval "\$(pyenv init -)"
 pyenv shell "$env_"
 pyenv exec $command \$*
 EOS
