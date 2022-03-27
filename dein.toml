@@ -47,7 +47,7 @@ let g:lsp_settings = {
 \           },
 \           'pylint': {
 \             'enabled': 1,
-\             'args': ["--rcfile setup.cfg"]
+\             'args': ["--rcfile setup.cfg", "--distable=import-error"]
 \           },
 \           'pyflakes': {
 \             'enabled': 0
@@ -58,10 +58,10 @@ let g:lsp_settings = {
 \   }
 \}
 '''
-# hook_post_source = '''
-#   " Highlight LSP warnings strongly (like errors)
-#   highlight link LspWarningHighlight Error
-# '''
+hook_post_source = '''
+  " Highlight LSP warnings strongly (like errors)
+  highlight link LspWarningHighlight Error
+'''
 
 # ['flake8', 'yapf', 'black', 'mypy']
 [[plugins]]
@@ -82,7 +82,6 @@ hook_add = '''
   \       ['lineinfo'],
   \       ['percent'],
   \       ['fileformat', 'fileencoding', 'filetype'],
-  \       ['lsp_errors'],
   \    ]
   \  },
   \  'inactive': {
