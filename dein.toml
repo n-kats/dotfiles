@@ -26,17 +26,87 @@ nmap <Leader>n :<C-u>LspReferences<CR>
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
 autocmd BufWritePre <buffer> LspDocumentFormatSync
+let g:lsp_settings_root_markers = ['.pyproject.toml', 'setup.py', '.git', '.git/']
 let g:lsp_settings = {
-\   'pyls-all': {
+\   'pylsp-all': {
 \     'workspace_config': {
-\       'pyls': {
-\         'configurationSources': []
-\       }
-\     }
-\   },
+\       'pylsp': {
+\         'configurationSources': ['flake8'],
+\         'plugins': {
+\           'flake8': {
+\             'enabled': 0
+\           },
+\           'mccabe': {
+\             'enabled': 0
+\           },
+\           'pycodestyle': {
+\             'enabled': 0
+\           },
+\           'pylsp_mypy': {
+\             'enabled': 1
+\           },
+\           'pylint': {
+\             'enabled': 1,
+\             'args': ["--rcfile setup.cfg"]
+\           },
+\           'pyflakes': {
+\             'enabled': 0
+\           },
+\         },
+\       },
+\     },
+\   }
 \}
 '''
+# hook_post_source = '''
+#   " Highlight LSP warnings strongly (like errors)
+#   highlight link LspWarningHighlight Error
+# '''
+
 # ['flake8', 'yapf', 'black', 'mypy']
+[[plugins]]
+repo = 'halkn/lightline-lsp'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+  \  'colorscheme': 'solarized',
+  \  'mode_map': {'c': 'NORMAL'},
+  \  'active': {
+  \    'left': [
+  \       ['mode', 'paste', 'lsp_errors', 'lsp_warnings'],
+  \       ['readonly', 'filename', 'modified']
+  \    ],
+  \    'right': [
+  \       ['lineinfo'],
+  \       ['percent'],
+  \       ['fileformat', 'fileencoding', 'filetype'],
+  \       ['lsp_errors'],
+  \    ]
+  \  },
+  \  'inactive': {
+  \    'left': [
+  \       ['mode', 'paste'],
+  \       ['readonly', 'filename', 'modified']
+  \    ],
+  \    'right': [
+  \       ['lineinfo'],
+  \       ['percent'],
+  \       ['fileformat', 'fileencoding', 'filetype'],
+  \       ['lsp_errors'],
+  \    ]
+  \  },
+  \  'component_expand': {
+  \    'lsp_warnings': 'lightline_lsp#warnings',
+  \    'lsp_errors':   'lightline_lsp#errors',
+  \  },
+  \  'component_type': {
+  \    'lsp_warnings': 'warning',
+  \    'lsp_errors':   'errors',
+  \  },
+  \}
+'''
 
 [[plugins]]
 repo='prabirshrestha/asyncomplete.vim'
@@ -175,18 +245,22 @@ let g:indentLine_color_term = 239
 
 '''
 
+ # let g:ale_fixers = {'python': ['autopep8', 'yapf', 'black']}
 [[plugins]]
 repo = 'w0rp/ale'
 hook_add = '''
+  let g:ale_python_auto_poetry = 1
+  let g:ale_python_pylint_executable = 'poetry run pylint'
+  let g:ale_python_pylint_use_global = 0
   if filereadable(".use_pysen")
     let g:ale_fixers = {'python': []}
   else
     let g:ale_fixers = {'python': ['autopep8', 'yapf', 'black']}
     let g:ale_fix_on_save = !filereadable(".not_autofix")
-    if filereadable("setup.cfg")
-      let g:ale_python_pylint_options = "--rcfile setup.cfg"
+    if filereadable('setup.cfg')
+      let g:ale_python_pylint_options = '--rcfile setup.cfg'
     else
-      let g:ale_python_pylint_options = ""
+      let g:ale_python_pylint_options = ''
     endif
   endif
 '''
@@ -319,7 +393,7 @@ on_ft = 'go'
 [[plugins]]
 repo = 'bonprosoft/pysen.vim'
 on_ft = 'python'
-on_ft = ''''
+hook_add = ''''
 let g:pysen_language_server_config = {
   \ 'enableLintOnSave': v:true,
   \ 'enableFormatOnSave': v:true,

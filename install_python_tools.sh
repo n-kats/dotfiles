@@ -53,7 +53,7 @@ EOS
 # poetry
 setup poetry \
   3.8.12 \
-  poetry pynvim python-language-server poetry-dynamic-versioning webencodings pysen-ls
+  poetry pynvim python-language-server poetry-dynamic-versioning webencodings python-lsp-server pylsp-mypy
 
 add_command poetry poetry zsh
 add_command poetry-dynamic-versioning poetry zsh
