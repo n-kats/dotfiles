@@ -70,41 +70,41 @@ repo = 'halkn/lightline-lsp'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-  let g:lightline = {
-  \  'colorscheme': 'solarized',
-  \  'mode_map': {'c': 'NORMAL'},
-  \  'active': {
-  \    'left': [
-  \       ['mode', 'paste', 'lsp_errors', 'lsp_warnings'],
-  \       ['readonly', 'filename', 'modified']
-  \    ],
-  \    'right': [
-  \       ['lineinfo'],
-  \       ['percent'],
-  \       ['fileformat', 'fileencoding', 'filetype'],
-  \    ]
-  \  },
-  \  'inactive': {
-  \    'left': [
-  \       ['mode', 'paste'],
-  \       ['readonly', 'filename', 'modified']
-  \    ],
-  \    'right': [
-  \       ['lineinfo'],
-  \       ['percent'],
-  \       ['fileformat', 'fileencoding', 'filetype'],
-  \       ['lsp_errors'],
-  \    ]
-  \  },
-  \  'component_expand': {
-  \    'lsp_warnings': 'lightline_lsp#warnings',
-  \    'lsp_errors':   'lightline_lsp#errors',
-  \  },
-  \  'component_type': {
-  \    'lsp_warnings': 'warning',
-  \    'lsp_errors':   'errors',
-  \  },
-  \}
+let g:lightline = {
+\  'colorscheme': 'solarized',
+\  'mode_map': {'c': 'NORMAL'},
+\  'active': {
+\    'left': [
+\       ['mode', 'paste', 'lsp_errors', 'lsp_warnings'],
+\       ['readonly', 'filename', 'modified', 'method']
+\    ],
+\    'right': [
+\       ['lineinfo'],
+\       ['percent'],
+\       ['fileformat', 'fileencoding', 'filetype'],
+\    ]
+\  },
+\  'inactive': {
+\    'left': [
+\       ['mode', 'paste'],
+\       ['readonly', 'filename', 'modified']
+\    ],
+\    'right': [
+\       ['lineinfo'],
+\       ['percent'],
+\       ['fileformat', 'fileencoding', 'filetype'],
+\       ['lsp_errors'],
+\    ]
+\  },
+\  'component_expand': {
+\    'lsp_warnings': 'lightline_lsp#warnings',
+\    'lsp_errors':   'lightline_lsp#errors',
+\  },
+\  'component_type': {
+\    'lsp_warnings': 'warning',
+\    'lsp_errors':   'errors',
+\  },
+\}
 '''
 
 [[plugins]]
@@ -254,7 +254,7 @@ hook_add = '''
   if filereadable(".use_pysen")
     let g:ale_fixers = {'python': []}
   else
-    let g:ale_fixers = {'python': ['autopep8', 'yapf', 'black']}
+    let g:ale_fixers = {'python': ['autopep8', 'yapf']}
     let g:ale_fix_on_save = !filereadable(".not_autofix")
     if filereadable('setup.cfg')
       let g:ale_python_pylint_options = '--rcfile setup.cfg'
