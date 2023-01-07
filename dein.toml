@@ -256,6 +256,8 @@ hook_add = '''
   else
     if filereadable(".use_black")
       let g:ale_fixers = {'python': ['autopep8', 'black']}
+    elseif filereadable(".not_autofix")
+      let g:ale_fixers = {'python': []}
     else
       let g:ale_fixers = {'python': ['autopep8', 'yapf']}
     endif

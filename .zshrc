@@ -118,6 +118,11 @@ if [ -d "$HOME/.yarn/bin" ]; then
   export PATH="$HOME/.yarn/bin:$PATH"
 fi
 
+# travis
+if [ ! -e "$HOME/.travis/travis.sh" ]; then
+  source /home/user/.travis/travis.sh
+fi
+
 # 補間
 ## poetory
 if [ ! -e "$HOME/.zfunc/_poetry" ] ; then
@@ -146,6 +151,7 @@ alias popy='poetry run python'
 alias posip='poetry run ipython'
 alias posh='poetry run bash'
 alias e_sh='exec $SHELL -l'
+alias duh='du -d 1 . -h | sort -h'
 bindkey -v
 
 pyenv_poetry()
