@@ -19,7 +19,7 @@ setup()
     echo "[I] ${name} is installed."
   fi
   pyenv shell "$name"
-  python -m pip install -U pip setuptools
+  python -m pip install -U pip setuptools wheel
   echo "[I] install $@."
   python -m pip install -U $*
   echo "[I] done."
@@ -52,11 +52,15 @@ EOS
 }
 # poetry
 setup poetry \
-  3.8.12 \
-  "poetry==1.1.13" pynvim python-language-server poetry-dynamic-versioning webencodings python-lsp-server pylsp-mypy
+  3.11.5 \
+  poetry~=1.7.0 poetry-core~=1.8.0 pynvim python-language-server poetry-dynamic-versioning \
+  webencodings python-lsp-server pylsp-mypy openai
 
 add_command poetry poetry zsh
 add_command poetry-dynamic-versioning poetry zsh
+add_command dunamai poetry zsh
+
+poetry config experimental.new-installer false
 
 # igraph
 if [[ "$IGRAPH" != "" ]]; then

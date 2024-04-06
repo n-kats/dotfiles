@@ -75,7 +75,8 @@ set guicursor=
 
 inoremap <silent> jj <ESC>
 nmap <silent> <ESC><ESC> :noh<CR>
-colorscheme zellner
+set background=light
+colorscheme retrobox
 
 if has('conceal')
   set conceallevel=2 concealcursor=niv
