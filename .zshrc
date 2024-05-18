@@ -114,6 +114,13 @@ if [ -d "$HOME/.yarn/bin" ]; then
   export PATH="$HOME/.yarn/bin:$PATH"
 fi
 
+### deno
+if [ -d "$HOME/.deno" ]; then
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
+
 # travis
 if [ ! -e "$HOME/.travis/travis.sh" ]; then
   source /home/user/.travis/travis.sh

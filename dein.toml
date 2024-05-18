@@ -26,7 +26,7 @@ nmap <Leader>n :<C-u>LspReferences<CR>
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
 autocmd BufWritePre <buffer> LspDocumentFormatSync
-let g:lsp_settings_root_markers = ['.pyproject.toml', 'setup.py', '.git', '.git/']
+let g:lsp_settings_root_markers = ['pyproject.toml', 'setup.py', '.git', '.git/']
 let g:lsp_settings = {
 \   'pylsp-all': {
 \     'workspace_config': {
@@ -46,11 +46,14 @@ let g:lsp_settings = {
 \             'enabled': 1
 \           },
 \           'pylint': {
-\             'enabled': 1,
+\             'enabled': 0,
 \             'args': ["--rcfile setup.cfg", "--distable=import-error"]
 \           },
 \           'pyflakes': {
 \             'enabled': 0
+\           },
+\           'ruff': {
+\             'enabled': 1
 \           },
 \         },
 \       },
@@ -63,7 +66,6 @@ hook_post_source = '''
   highlight link LspWarningHighlight Error
 '''
 
-# ['flake8', 'yapf', 'black', 'mypy']
 [[plugins]]
 repo = 'halkn/lightline-lsp'
 
@@ -154,21 +156,71 @@ hook_add = '''
 repo = 'Shougo/unite.vim'
 
 [[plugins]]
-repo = 'Shougo/vimfiler'
-hook_add = '''
-nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
-let g:vimfiler_as_default_explorer=1
-let g:vimfiler_ignore_pattern='\(^\.\|\~$\|\.pyc$\|\.[oad]$\)'
-'''
-
-# [[plugins]]
-# repo = 'Shougo/defx.nvim'
-
-[[plugins]]
 repo = 'lambdalisue/fern.vim'
+hook_add = '''
+nnoremap \e :Fern . -reveal=% -drawer -toggle<CR>
+'''
 
 [[plugins]]  # fern 用
 repo = 'antoinemadec/FixCursorHold.nvim'
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'Shougo/ddu.vim'
+# hook_add = '''
+# call ddu#custom#patch_global({
+#     \   'ui': 'ff',
+#     \   'sources': [{'name':'file','params':{}},{'name':'mr'},{'name':'register'},{'name':'buffer'}],
+#     \   'sourceOptions': {
+#     \     '_': {
+#     \       'matchers': ['matcher_substring'],
+#     \     },
+#     \   },
+#     \   'kindOptions': {
+#     \     'file': {
+#     \       'defaultAction': 'open',
+#     \     },
+#     \   },
+#     \ })
+# '''
+
+# [[plugins]]
+# repo = 'Shougo/ddu-ui-ff'
+# hook_add = '''
+# call ddu#custom#patch_global(#{
+#     \   ui: 'ff',
+#     \ })
+# '''
+#
+# [[plugins]]
+# repo = 'Shougo/ddu-source-file_rec'
+# hook_add = '''
+# call ddu#start(#{ sources: [#{ name: 'file_rec' }] })
+# call ddu#custom#patch_global('sourceOptions', #{
+#       \   file_rec: #{ path: expand("~") },
+#       \ })
+# '''
+#
+# [[plugins]]
+# repo = 'Shougo/ddu-kind-file'
+#
+# [[plugins]]
+# repo = 'Shougo/ddu-ui-filer'
+# hook_add = '''
+# call ddu#custom#patch_global(#{
+#     \   ui: 'filer',
+#     \   actionOptions: #{
+#     \     narrow: #{
+#     \       quit: v:false,
+#     \     },
+#     \   },
+#     \ })
+# '''
+#
+# [[plugins]]
+# repo = 'Shougo/ddu-filter-matcher_substring'
 
 [[plugins]]
 repo = 'mattn/sonictemplate-vim'
@@ -251,23 +303,20 @@ hook_add = '''
   let g:ale_python_auto_poetry = 1
   let g:ale_python_pylint_executable = 'poetry run pylint'
   let g:ale_python_pylint_use_global = 0
-  let g:ale_linters = {'python': ['pylint']}
-  if filereadable(".use_pysen")
+  let g:ale_python_ruff_auto_poetry = 1
+  let g:ale_linters = {'python': ['ruff']}
+  if filereadable(".use_black")
+    let g:ale_fixers = {'python': ['autopep8', 'black']}
+  elseif filereadable(".not_autofix")
     let g:ale_fixers = {'python': []}
   else
-    if filereadable(".use_black")
-      let g:ale_fixers = {'python': ['autopep8', 'black']}
-    elseif filereadable(".not_autofix")
-      let g:ale_fixers = {'python': []}
-    else
-      let g:ale_fixers = {'python': ['autopep8', 'yapf']}
-    endif
-    let g:ale_fix_on_save = !filereadable(".not_autofix")
-    if filereadable('setup.cfg')
-      let g:ale_python_pylint_options = '--rcfile setup.cfg'
-    else
-      let g:ale_python_pylint_options = ''
-    endif
+    let g:ale_fixers = {'python': ['ruff']}
+  endif
+  let g:ale_fix_on_save = !filereadable(".not_autofix")
+  if filereadable('setup.cfg')
+    let g:ale_python_pylint_options = '--rcfile setup.cfg'
+  else
+    let g:ale_python_pylint_options = ''
   endif
 '''
 
@@ -288,29 +337,10 @@ nnoremap <leader>t :TagbarToggle<CR>
 repo = 'mattn/emmet-vim'
 on_ft = 'html'
 
-[[plugins]]
-repo = 'slim-template/vim-slim'
-on_ft = 'slim'
-
 # tex
 [[plugins]]
 repo = 'vim-latex/vim-latex'
 on_ft = 'tex'
-
-# ruby
-[[plugins]]
-repo = 'tpope/vim-rails'
-on_ft = 'ruby'
-
-[[plugins]]
-repo = 'tpope/vim-endwise'
-on_ft = 'ruby'
-
-# [[plugins]]
-# repo = 'alpaca-tc/alpaca_tags'
-
-# [[plugins]]
-# repo = 'vim-scripts/ruby-matchit'
 
 
 [[plugins]]
@@ -347,10 +377,6 @@ on_ft = 'vue'
 # repo = 'nathanaelkane/vim-indent-guides'
 
 [[plugins]]
-repo = 'kchmck/vim-coffee-script'
-on_ft = 'coffee'
-
-[[plugins]]
 repo = 'mtscout6/vim-cjsx'
 on_ft = 'cjsx'
 
@@ -362,15 +388,6 @@ on_ft = 'tag'
 [[plugins]]
 repo = 'derekwyatt/vim-scala'
 on_ft = 'scala'
-
-# go
-# [[plugins]]
-# repo = "nsf/gocode"
-# on_ft = 'go'
-#
-# [[plugins]]
-# repo = "rogpeppe/godef"
-# on_ft = 'go'
 
 [[plugins]]
 repo = 'fatih/vim-go'
@@ -387,27 +404,7 @@ let g:go_gocode_unimported_packages = 1
 repo = 'vim-jp/vim-go-extra'
 on_ft = 'go'
 
-# [[plugins]]
-# repo = 'neomake/neomake'
-
-# [[plugins]]
-# repo = 'zchee/deoplete-go'
-# on_i = 2
-# on_ft = 'go'
-
 # python
-[[plugins]]
-repo = 'bonprosoft/pysen.vim'
-on_ft = 'python'
-hook_add = ''''
-let g:pysen_language_server_config = {
-  \ 'enableLintOnSave': v:true,
-  \ 'enableFormatOnSave': v:true,
-  \ 'enableCodeAction': v:true,
-  \ 'lintTargets': ['lint'],
-  \ 'formatTargets': ['format', 'lint'],
-  \ }
-'''
 # [[plugins]] # TODO
 # repo='ryanolsonx/vim-lsp-python'
 # on_ft = 'python'
@@ -519,15 +516,17 @@ hook_add = '''
 # [[plugins]]
 # repo = 'vim-scripts/CoqIDE'
 # on_ft = 'coq'
-
-# julia
-# [[plugins]]
-# repo = 'n-kats/julia-vim'
-# rev = 'latextounicode'
-# on_ft = 'julia'
-
 [[plugins]]
 repo = 'github/copilot.vim'
 
 [[plugins]]
-repo = 'CoderCookE/vim-chatgpt'
+repo = 'madox2/vim-ai'
+hook_add = '''
+  let g:vim_ai_token_file_path = '~/.config/openai.token'
+'''
+
+# [[plugins]]
+# repo = 'Robitx/gp.nvim'
+# hook_add = '''
+# lua require('gp').setup()
+# '''

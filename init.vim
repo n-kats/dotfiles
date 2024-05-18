@@ -26,6 +26,8 @@ else
   let g:python3_host_prog = s:python_path_python3
 endif
 
+let s:has_openai = system('python3 -c "import openai" &>/dev/null && echo -n 1')
+
 " }}}
 
 " Package": {{{
