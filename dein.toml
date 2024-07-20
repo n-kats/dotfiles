@@ -27,6 +27,7 @@ nmap <Leader>n :<C-u>LspReferences<CR>
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
+depends = 'vim-lsp'
 hook_add = '''
 autocmd BufWritePre <buffer> LspDocumentFormatSync
 let g:lsp_settings_root_markers = ['pyproject.toml', 'setup.py', '.git', '.git/']
@@ -118,7 +119,7 @@ repo='Shougo/ddc.vim'
 hook_add = '''
 call ddc#custom#patch_global('ui', 'pum')
 
-call ddc#custom#patch_global('sources', ['copilot', 'lsp', 'neosnippet'])
+call ddc#custom#patch_global('sources', ['copilot', 'vim-lsp', 'neosnippet'])
 
 call ddc#custom#patch_global('sourceOptions', #{
       \   copilot: #{
@@ -127,9 +128,9 @@ call ddc#custom#patch_global('sourceOptions', #{
       \     minAutoCompleteLength: 0,
       \     isVolatile: v:true,
       \   },
-      \   lsp: #{
+      \   vim-lsp: #{
       \     mark: '[lsp]',
-      \     forceCompletionPattern: '\.\w*|:\w*|->\w*',
+      \     matchers: [],
       \   },
       \   neosnippet: #{
       \     mark: '[snip]'
@@ -137,23 +138,30 @@ call ddc#custom#patch_global('sourceOptions', #{
       \ })
 
 call ddc#custom#patch_global('sourceParams', #{
-      \   lsp: #{
-      \     snippetEngine: denops#callback#register({
-      \           body -> vsnip#anonymous(body)
-      \     }),
-      \     enableResolveItem: v:true,
-      \     enableAdditionalTextEdit: v:true,
-      \   }
+      \   vim-lsp: #{
+      \     ignoreCompleteProvider: v:true,
+      \   },
       \ })
 
 call ddc#enable()
 
 '''
 
-
+#       \   lsp: #{
+#       \     mark: '[lsp]',
+#       \     forceCompletionPattern: '\.\w*|:\w*|->\w*',
+#       \   },
+#
+#       \   lsp: #{
+#       \     snippetEngine: denops#callback#register({
+#       \           body -> vsnip#anonymous(body)
+#       \     }),
+#       \     enableResolveItem: v:true,
+#       \     enableAdditionalTextEdit: v:true,
+#       \   }
 ## completion ui
 [[plugins]]
-repo='Shougo/pum.vim'
+repo = 'Shougo/pum.vim'
 hook_add = '''
 inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
@@ -175,7 +183,7 @@ inoremap <silent><expr> <TAB>
 '''
 
 [[plugins]]
-repo='Shougo/ddc-ui-pum'
+repo = 'Shougo/ddc-ui-pum'
 
 ## copilot
 [[plugins]]
@@ -185,15 +193,28 @@ let g:copilot_no_maps = v:true
 '''
 
 [[plugins]]
-repo='Shougo/ddc-source-copilot'
+repo = 'Shougo/ddc-source-copilot'
 
 ## lsp
 [[plugins]]
-repo='Shougo/ddc-source-lsp'
+repo = 'shun/ddc-vim-lsp'
+
+# [[plugins]]
+# repo = 'Shougo/ddc-source-lsp'
+# on_source = 'ddc.vim'
+# hook_add = '''
+# lua << EOF
+# local capabilities = require("ddc_source_lsp").make_client_capabilities()
+#
+# require("lspconfig").denols.setup({
+#   capabilities = capabilities,
+# })
+# EOF
+# '''
 
 # [[plugins]]
 # repo='prabirshrestha/asyncomplete.vim'
-
+#
 # [[plugins]]
 # repo='prabirshrestha/asyncomplete-lsp.vim'
 
@@ -462,48 +483,6 @@ let g:go_gocode_unimported_packages = 1
 [[plugins]]
 repo = 'vim-jp/vim-go-extra'
 on_ft = 'go'
-
-# python
-# [[plugins]] # TODO
-# repo='ryanolsonx/vim-lsp-python'
-# on_ft = 'python'
-# hook_add = '''
-#   if executable('pyls')
-#     au User lsp_setup call lsp#register_server({
-#         \ 'name': 'pyls',
-#         \ 'cmd': {server_info->['pyls']},
-#         \ 'whitelist': ['python'],
-#         \ 'workspace_config': {
-#         \   'pyls': {
-#         \     'plugins': {
-#         \       'pydocstyle': {'enabled': v:true},
-#         \       'preload': {'enabled': v:true, 'modules': ['tensorflow', 'numpy']},
-#         \       'yapf': {'enabled': v:true},
-#         \       'isort': {'enabled': v:false}
-#         \     }
-#         \   }
-#         \ }})
-#   endif
-# '''
-# c.f. https://github.com/palantir/python-language-server/blob/develop/vscode-client/package.json
-
-[[plugins]]
-repo = 'davidhalter/jedi-vim'
-on_ft = 'python'
-hook_add = '''
-  let g:jedi#auto_initialization = 1
-  let g:jedi#popup_on_dot = 0
-  let g:jedi#force_py_version = 3
-  let g:jedi#completions_enabled = 1
-  let g:jedi#smart_auto_mappings = 0
-  let g:jedi#goto_command = ""
-  let g:jedi#goto_assignments_command = "<leader>g"
-  let g:jedi#goto_definitions_command = ""
-  let g:jedi#documentation_command = ""
-  let g:jedi#usages_command = ""
-  let g:jedi#completions_command = "<C-c>"
-  let g:jedi#rename_command = "<leader>R"
-'''
 
 [[plugins]]
 repo = 'nvie/vim-flake8'

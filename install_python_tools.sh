@@ -53,7 +53,7 @@ EOS
 # poetry
 setup poetry \
   3.11.5 \
-  poetry~=1.7.0 poetry-core~=1.8.0 pynvim python-language-server poetry-dynamic-versioning \
+  poetry~=1.8.0 poetry-core~=1.9.0 pynvim python-language-server poetry-dynamic-versioning \
   webencodings python-lsp-server pylsp-mypy openai
 
 add_command poetry poetry zsh
@@ -61,14 +61,5 @@ add_command poetry-dynamic-versioning poetry zsh
 add_command dunamai poetry zsh
 
 poetry config experimental.new-installer false
-
-# igraph
-if [[ "$IGRAPH" != "" ]]; then
-setup igraph \
-  3.8.12 \
-  $IGRAPH pynvim python-language-server
-add_command igraph igraph zsh
-add_command_update igraph zsh $IGRAPH
-fi
 
 update_bin
