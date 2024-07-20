@@ -147,18 +147,6 @@ call ddc#enable()
 
 '''
 
-#       \   lsp: #{
-#       \     mark: '[lsp]',
-#       \     forceCompletionPattern: '\.\w*|:\w*|->\w*',
-#       \   },
-#
-#       \   lsp: #{
-#       \     snippetEngine: denops#callback#register({
-#       \           body -> vsnip#anonymous(body)
-#       \     }),
-#       \     enableResolveItem: v:true,
-#       \     enableAdditionalTextEdit: v:true,
-#       \   }
 ## completion ui
 [[plugins]]
 repo = 'Shougo/pum.vim'
@@ -198,25 +186,6 @@ repo = 'Shougo/ddc-source-copilot'
 ## lsp
 [[plugins]]
 repo = 'shun/ddc-vim-lsp'
-
-# [[plugins]]
-# repo = 'Shougo/ddc-source-lsp'
-# on_source = 'ddc.vim'
-# hook_add = '''
-# lua << EOF
-# local capabilities = require("ddc_source_lsp").make_client_capabilities()
-#
-# require("lspconfig").denols.setup({
-#   capabilities = capabilities,
-# })
-# EOF
-# '''
-
-# [[plugins]]
-# repo='prabirshrestha/asyncomplete.vim'
-#
-# [[plugins]]
-# repo='prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
@@ -374,30 +343,6 @@ let g:indentLine_fileTypeExclude = ['help']
 set list lcs=tab:\|\ ""
 let g:indentLine_color_term = 239
 
-'''
-
- # let g:ale_fixers = {'python': ['autopep8', 'yapf', 'black']}
-[[plugins]]
-repo = 'w0rp/ale'
-hook_add = '''
-  let g:ale_python_auto_poetry = 1
-  let g:ale_python_pylint_executable = 'poetry run pylint'
-  let g:ale_python_pylint_use_global = 0
-  let g:ale_python_ruff_auto_poetry = 1
-  let g:ale_linters = {'python': ['ruff']}
-  if filereadable(".use_black")
-    let g:ale_fixers = {'python': ['autopep8', 'black']}
-  elseif filereadable(".not_autofix")
-    let g:ale_fixers = {'python': []}
-  else
-    let g:ale_fixers = {'python': ['ruff']}
-  endif
-  let g:ale_fix_on_save = !filereadable(".not_autofix")
-  if filereadable('setup.cfg')
-    let g:ale_python_pylint_options = '--rcfile setup.cfg'
-  else
-    let g:ale_python_pylint_options = ''
-  endif
 '''
 
 [[plugins]]
