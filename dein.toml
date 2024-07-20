@@ -135,6 +135,9 @@ call ddc#custom#patch_global('sourceOptions', #{
       \   neosnippet: #{
       \     mark: '[snip]'
       \   },
+      \   _: #{
+      \     matchers: ['matcher_head'],
+      \   },
       \ })
 
 call ddc#custom#patch_global('sourceParams', #{
@@ -186,6 +189,9 @@ repo = 'Shougo/ddc-source-copilot'
 ## lsp
 [[plugins]]
 repo = 'shun/ddc-vim-lsp'
+
+[[plugins]]
+repo = 'Shougo/ddc-filter-matcher_head'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
