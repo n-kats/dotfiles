@@ -25,16 +25,34 @@ setup()
   echo "[I] done."
 }
 
+add_poetry_command()
+{
+  cat <<EOS > "$HOME/bin/poetry"
+#! /bin/zsh
+eval "\$(pyenv init -)"
+
+# 現在のpyenv 環境名に poetry がなければ poetry 環境で実行
+if [ "\$(pyenv version-name | grep poetry)" = "" ]; then
+  pyenv shell "poetry"
+fi
+pyenv exec poetry "\$@"
+EOS
+}
+
 add_command()
 {
   command="$1"
-  env_="$2"
-  shell_="$3"
+  default_env="$2"
+  expected_env_condition="$3"
+  shell_="$4"
   cat <<EOS > "$HOME/bin/$command"
-#! /bin/${shell_}
+#! /bin/zsh
 eval "\$(pyenv init -)"
-pyenv shell "$env_"
-pyenv exec $command \$*
+
+if [ "\$(pyenv version-name | grep ${expected_env_condition})" = "" ]; then
+  pyenv shell ${default_env}
+fi
+pyenv exec "${command}" "\$@"
 EOS
 }
 
@@ -50,15 +68,31 @@ pyenv shell "$env_"
 pip install -U $@
 EOS
 }
+
+install_poetry_env()
+{
+  python_version="$1"
+  poetry_version="$2"
+  addtional_packages="${@:3}"
+
+  setup poetry_${poetry_version}_py_${python_version} \
+    "$python_version" "poetry==$poetry_version" \
+    pynvim python-language-server poetry-dynamic-versioning \
+    python-lsp-server pylsp-mypy openai \
+    "$addtional_packages"
+}
+
 # poetry
 setup poetry \
   3.11.5 \
   poetry~=1.8.0 poetry-core~=1.9.0 pynvim python-language-server poetry-dynamic-versioning \
   webencodings python-lsp-server pylsp-mypy openai
 
-add_command poetry poetry zsh
-add_command poetry-dynamic-versioning poetry zsh
-add_command dunamai poetry zsh
+install_poetry_env 3.11.5 1.8.3
+
+add_command poetry poetry poetry zsh
+add_command poetry-dynamic-versioning poetry poetry zsh
+add_command dunamai poetry poetry zsh
 
 poetry config experimental.new-installer false
 
