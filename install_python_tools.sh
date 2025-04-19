@@ -21,7 +21,7 @@ setup()
   pyenv shell "$name"
   python -m pip install -U pip setuptools wheel
   echo "[I] install $@."
-  python -m pip install -U $*
+  python -m pip install -U "$@"
   echo "[I] done."
 }
 
@@ -73,13 +73,12 @@ install_poetry_env()
 {
   python_version="$1"
   poetry_version="$2"
-  addtional_packages="${@:3}"
+  addtional_packages=("${@:3}")
 
   setup poetry_${poetry_version}_py_${python_version} \
-    "$python_version" "poetry==$poetry_version" \
-    pynvim python-language-server poetry-dynamic-versioning \
-    python-lsp-server pylsp-mypy openai \
-    "$addtional_packages"
+    "$python_version" "poetry==$poetry_version" "${addtional_packages[@]}" \
+    pynvim poetry-dynamic-versioning \
+    python-lsp-server python-lsp-ruff pylsp-mypy openai pipdeptree \
 }
 
 # poetry
@@ -88,7 +87,13 @@ setup poetry \
   poetry~=1.8.0 poetry-core~=1.9.0 pynvim python-language-server poetry-dynamic-versioning \
   webencodings python-lsp-server pylsp-mypy openai
 
-install_poetry_env 3.11.5 1.8.3
+install_poetry_env 3.11.5 1.8.3 aider-chat
+install_poetry_env 3.8.19 1.4.2 "poetry-core==1.5.2" "poetry_dynamic_versioning==0.13.1"
+install_poetry_env 3.8.19 1.7.1
+install_poetry_env 3.8.19 1.5.1
+install_poetry_env 3.10.14 1.8.3
+install_poetry_env 3.11.11 2.0.1
+install_poetry_env 3.10.14 1.8.4
 
 add_command poetry poetry poetry zsh
 add_command poetry-dynamic-versioning poetry poetry zsh

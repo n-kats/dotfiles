@@ -4,19 +4,25 @@ let s:has_pipenv = system('type pipenv &>/dev/null && echo -n 1')
 let s:has_pyenv = system('type pyenv &>/dev/null && echo -n 1')
 let s:has_poetry = system('type poetry &>/dev/null && echo -n 1')
 let s:has_pyenv_poetry = s:has_pyenv && system('pyenv prefix poetry &>/dev/null && echo -n 1')
+let s:has_uv = system('type uv &>/dev/null && echo -n 1')
 
 let g:is_poetry_active = s:has_poetry && system('poetry check &>/dev/null && echo -n 1')
 let g:is_pipenv_active = s:has_pipenv && ! g:is_poetry_active && system('pipenv --venv &>/dev/null && echo -n 1')
 let s:is_pyenv_poetry_active = s:has_pyenv_poetry && g:is_poetry_active
 let s:is_pyenv_system = s:has_pyenv ? system('(pyenv version | grep system) &>/dev/null && echo -n 1') : 0
+let g:is_uv_project = s:has_uv && filereadable('.use_uv')
 
 let s:python_path_poetry = g:is_poetry_active ? system('echo -n $(poetry run which python)') : ""
 let s:python_path_pipenv = g:is_pipenv_active ? system('echo -n $(pipenv --py)') : ""
 let s:python_path_pyenv = (s:has_pyenv && ! s:is_pyenv_system) ? system('echo -n $(pyenv prefix)/bin/python') : ""
 let s:python_path_pyenv_poetry = s:is_pyenv_poetry_active ? system('echo -n $(pyenv prefix poetry)/bin/python') : ""
+let s:python_path_uv = g:is_uv_project ? system('uv python dir') : ""
 let s:python_path_python3 = system('echo -n $(which python3)')
 let g:is_pyenv_system = s:is_pyenv_system
-if s:is_pyenv_poetry_active
+
+if g:is_uv_project
+  let g:python3_host_prog = s:python_path_uv
+elseif s:is_pyenv_poetry_active
   let g:python3_host_prog = s:python_path_pyenv_poetry
 elseif g:is_pipenv_active
   let g:python3_host_prog = s:python_path_pyenv
@@ -36,22 +42,23 @@ let $MY_DEIN_TOML = '~/.config/nvim/dein.toml'
 let $LOCAL_DEIN_TOML = '~/.config/nvim/dein.local.toml'
 set runtimepath^=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 let g:dein#types#git#default_protocol = 'ssh'
-if isdirectory(expand('~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim'))
-  call dein#begin(expand('~/.cache/nvim/dein'))
-  call dein#load_toml($MY_DEIN_TOML)
+if !isdirectory(expand('~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim'))
+  system('mkdir -p ~/.cache/nvim/dein/repos/github.com/Shougo')
+  system('git clone https://github.com/Shougo/dein.vim.git ~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim')
+endif
 
-  if filereadable(expand($LOCAL_DEIN_TOML))
-    call dein#load_toml($LOCAL_DEIN_TOML)
-  endif
+call dein#begin(expand('~/.cache/nvim/dein'))
+call dein#load_toml($MY_DEIN_TOML)
 
-  call dein#end()
+if filereadable(expand($LOCAL_DEIN_TOML))
+  call dein#load_toml($LOCAL_DEIN_TOML)
+endif
 
-  filetype plugin indent on
-  if dein#check_install()
-    call dein#install()
-  endif
-else
-  echo s:dein_path 'does not exist.'
+call dein#end()
+
+filetype plugin indent on
+if dein#check_install()
+  call dein#install()
 endif
 
 " }}}
@@ -123,10 +130,6 @@ set cinoptions=g-1
 autocmd FileType python let b:did_ftplugin = 1
 " }}}
 
-" vue.js": {{{
-autocmd BufRead,BufNewFile *.vue setfiletype vue
-" }}}
-
 " tex": {{{
 let g:tex_conceal='' "うざい式表示を滅ぼす
 if expand("%:e") == "tex"
@@ -190,4 +193,25 @@ else
     source ~/.vimrc.local
   endif
 endif
+
+if filereadable(".vimrc")
+  source .vimrc
+endif
+" }}}
+
+" plugin test": {{{
+command! -bang -nargs=* PluginTest call PluginTest(<bang>0, <q-args>, 0)
+command! -bang -nargs=* PluginTestNoPlugin call PluginTest(<bang>0, <q-args>, 1)
+function! PluginTest(is_vim, extraCommand, no_plugin) abort
+  let cmd = a:is_vim ? 'terminal env VIMRUNTIME= vim' : 'terminal nvim'
+  let extraCommand = empty(a:extraCommand) ? '' : ' -c"au VimEnter * ' . a:extraCommand . '"'
+  let plugintestrc = empty(findfile('.plugintest.vimrc', getcwd())) ? '' : ' -S .plugintest.vimrc'
+  vnew
+  if a:no_plugin
+    execute $"silent {cmd} -u NONE -i NONE -N --cmd \"set rtp+={getcwd()}\" {plugintestrc} {extraCommand}"
+  else
+    execute $"silent {cmd} -u .plugintest.vimrc -i NONE -N --cmd \"set rtp+={getcwd()}\" {extraCommand}"
+  endif
+  startinsert
+endfunction
 " }}}

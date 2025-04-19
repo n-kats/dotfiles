@@ -6,6 +6,12 @@ repo = 'Shougo/denite.nvim'
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
+# hook_add = '''
+# let g:denops_server_addr = '127.0.0.1:32123'
+# '''
+#
+# [[plugins]]
+# repo = 'vim-denops/denops-shared-server.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -35,7 +41,6 @@ let g:lsp_settings = {
 \   'pylsp-all': {
 \     'workspace_config': {
 \       'pylsp': {
-\         'configurationSources': ['flake8'],
 \         'plugins': {
 \           'flake8': {
 \             'enabled': 0
@@ -57,7 +62,7 @@ let g:lsp_settings = {
 \             'enabled': 0
 \           },
 \           'ruff': {
-\             'enabled': 1
+\             'enabled': 0
 \           },
 \         },
 \       },
@@ -65,6 +70,7 @@ let g:lsp_settings = {
 \   }
 \}
 '''
+# \         'configurationSources': ['flake8'],
 hook_post_source = '''
   " Highlight LSP warnings strongly (like errors)
   highlight link LspWarningHighlight Error
@@ -302,7 +308,16 @@ let g:quickrun_config['cpp'] = {
   \'cmdopt' : '-std=c++14',
   \}
 
-if g:is_pipenv_active
+if g:is_uv_project
+  let g:quickrun_config['python'] = {
+      \'command' : 'uv',
+      \'exec': ['%c run python %s']
+      \}
+  let g:quickrun_config['yaml'] = {
+      \'command' : 'uv',
+      \'exec': ['%c run yq . %s']
+      \}
+elseif g:is_pipenv_active
   let g:quickrun_config['python'] = {
       \'command' : 'pipenv',
       \'exec': ['%c run python %s']
@@ -394,33 +409,6 @@ on_ft = 'typescript'
 repo = 'jason0x43/vim-js-indent'
 
 [[plugins]]
-repo = 'mxw/vim-jsx'
-on_ft = 'jsx'
-
-[[plugins]]
-repo = 'posva/vim-vue'
-on_ft = 'vue'
-
-# [[plugins]]
-# repo = 'claco/jasmine/vim'
-
-# [[plugins]]
-# repo = 'nathanaelkane/vim-indent-guides'
-
-[[plugins]]
-repo = 'mtscout6/vim-cjsx'
-on_ft = 'cjsx'
-
-[[plugins]]
-repo = 'ryym/vim-riot'
-on_ft = 'tag'
-
-# scala
-[[plugins]]
-repo = 'derekwyatt/vim-scala'
-on_ft = 'scala'
-
-[[plugins]]
 repo = 'fatih/vim-go'
 on_ft = 'go'
 hook_add = '''
@@ -435,9 +423,9 @@ let g:go_gocode_unimported_packages = 1
 repo = 'vim-jp/vim-go-extra'
 on_ft = 'go'
 
-[[plugins]]
-repo = 'nvie/vim-flake8'
-on_ft = 'python'
+# [[plugins]]
+# repo = 'nvie/vim-flake8'
+# on_ft = 'python'
 
 # rust
 [[plugins]]
@@ -492,14 +480,166 @@ hook_add = '''
 # repo = 'vim-scripts/CoqIDE'
 # on_ft = 'coq'
 
-[[plugins]]
-repo = 'madox2/vim-ai'
-hook_add = '''
-  let g:vim_ai_token_file_path = '~/.config/openai.token'
-'''
+# [[plugins]]
+# repo = 'madox2/vim-ai'
+# hook_add = '''
+#   let g:vim_ai_token_file_path = '~/.config/openai.token'
+# '''
 
 # [[plugins]]
 # repo = 'Robitx/gp.nvim'
 # hook_add = '''
 # lua require('gp').setup()
 # '''
+
+# [[plugins]]
+# repo = 'nekowasabi/aider.vim'
+# hook_add = '''
+# " let g:aider_command = 'aider --no-auto-commits'
+# let g:aider_command = 'aider'
+#
+# let g:aider_buffer_open_type = 'split'
+# " let g:aider_floatwin_width = 100
+# " let g:aider_floatwin_height = 20
+#
+# " let g:aider_additional_prompt = 'Your additional prompt here'
+#
+# nnoremap <silent> <leader>ar :AiderRun<CR>
+# nnoremap <silent> <leader>aa :AiderAddCurrentFile<CR>
+# nnoremap <silent> <leader>aw :AiderAddWeb<CR>
+# nnoremap <silent> <leader>ax :AiderExit<CR>
+# nnoremap <silent> <leader>ai :AiderAddIgnoreCurrentFile<CR>
+# nnoremap <silent> <leader>aI :AiderOpenIgnore<CR>
+# nnoremap <silent> <leader>ah :AiderHide<CR>
+# tnoremap <C-x><C-x> <C-\><C-n>:AiderHide<CR>
+# vmap <leader>av :AiderVisualTextWithPrompt<CR>
+#
+# augroup AiderOpenGroup
+#   autocmd!
+#   autocmd User AiderOpen call s:AiderOpenHandler()
+# augroup END
+#
+# function! s:AiderOpenHandler() abort
+#   tnoremap <buffer> <Esc> <C-\><C-n>
+#   nnoremap <buffer> <Esc> :AiderHide<CR>
+# endfunction
+# '''
+
+# [[plugins]]
+# repo = 'CopilotC-Nvim/CopilotChat.nvim'
+# hook_add = '''
+# lua require("CopilotChat").setup {
+#   debug = true, -- Enable debugging
+#   -- See Configuration section for rest
+# }
+# '''
+#
+# [[plugins]]
+# repo = 'nvim-lua/plenary.nvim"'
+
+
+# avante
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+
+[[plugins]]
+repo = 'stevearc/dressing.nvim'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'MunifTanjim/nui.nvim'
+
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+
+[[plugins]]
+repo = 'nvim-tree/nvim-web-devicons'
+
+[[plugins]]
+repo = 'zbirenbaum/copilot.lua'
+
+[[plugins]]
+repo = 'yetone/avante.nvim'
+on_event = 'VimEnter'
+build = 'make'
+hook_source = '''
+lua << EOF
+require("avante").setup({
+  provider = "openai",
+  openai = {
+    endpoint = "https://api.openai.com/v1",
+    model = "gpt-4o",
+    timeout = 30000,
+    temperature = 0,
+    max_completion_tokens = 8192,
+  },
+  windows = {
+    ask = {
+      floating = true,
+      border = "single",
+      start_insert = true,
+    }
+  }
+})
+EOF
+'''
+
+[[plugins]]
+repo = 'echasnovski/mini.pick'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+
+[[plugins]]
+repo = 'ibhagwan/fzf-lua'
+
+[[plugins]]
+repo = 'HakonHarnes/img-clip.nvim'
+hook_add = '''
+let g:img_clip_settings = {
+\ 'default': {
+\   'embed_image_as_base64': v:false,
+\   'prompt_for_file_name': v:false,
+\   'drag_and_drop': {
+\     'insert_mode': v:true,
+\   },
+\   'use_absolute_path': v:true,
+\ }
+\}
+'''
+
+[[plugins]]
+repo = 'MeanderingProgrammer/render-markdown.nvim'
+on_ft = ['markdown', 'Avante']
+hook_add = '''
+let g:render_markdown_file_types = ['markdown', 'Avante']
+'''
+
+[[plugins]]
+repo = 'ravitemer/mcphub.nvim'
+build = 'npm install -g mcp-hub@latest'
+depends = ['nvim-lua/plenary.nvim']
+hook_source = '''
+lua << EOF
+local home = os.getenv("HOME")
+local lua_version = _VERSION:match("%d+%.%d+")
+package.path = package.path .. ";" .. home .. "/.luarocks/share/lua/" .. lua_version .. "/?.lua"
+
+local dotenv = require('lua-dotenv')
+dotenv.load_dotenv(".env")
+
+local mcphub_port = tonumber(dotenv.get("MCPHUB_PORT", 54321))
+local mcp_config = vim.fn.filereadable("mcpservers.json") == 1 and "mcpservers.json" or vim.fn.expand("~/.config/nvim/mcpservers.json")
+
+require("mcphub").setup({
+  port = mcphub_port,
+  config = mcp_config,
+  log = {
+    level = vim.log.levels.WARN,
+    to_file = true,
+  },
+})
+EOF
+'''

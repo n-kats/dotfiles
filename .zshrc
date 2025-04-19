@@ -101,6 +101,11 @@ if [[ -e $HOME/.poetry/bin ]]; then
   export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
+## uv
+if command -v uv &>/dev/null; then
+  eval "$(uv generate-shell-completion zsh)"
+fi
+
 ### go
 export GOPATH=$HOME/.go
 export PATH="$GOPATH/bin:$PATH"
@@ -109,6 +114,12 @@ export PATH="$GOPATH/bin:$PATH"
 if [ -f $HOME/.cargo/env ]; then
   source $HOME/.cargo/env
 fi
+
+### node
+if command -v npm &>/dev/null; then
+  export PATH="$(npm prefix -g)/bin:$PATH"
+fi
+
 
 if [ -d "$HOME/.yarn/bin" ]; then
   export PATH="$HOME/.yarn/bin:$PATH"
@@ -119,6 +130,22 @@ if [ -d "$HOME/.deno" ]; then
   export DENO_INSTALL="$HOME/.deno"
   export PATH="$DENO_INSTALL/bin:$PATH"
 fi
+
+### bun
+if [ -d "$HOME/.bun" ]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# bun completions
+[ -s "/home/user/.bun/_bun" ] && source "/home/user/.bun/_bun"
+
+### pnpm
+export PNPM_HOME="/home/user/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 
 # travis
@@ -135,7 +162,15 @@ if [ ! -e "$HOME/.zfunc/_poetry" ] ; then
   fi
 fi
 
-export PATH="$HOME/bin:$PATH"
+## rye
+if [ ! -e "$HOME/.zfunc/_rye" ] ; then
+  if type rye > /dev/null 2>&1; then
+    mkdir -p $HOME/.zfunc
+    rye self completion -s zsh > $HOME/.zfunc/_rye
+  fi
+fi
+
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 alias sudo='sudo '
 alias c_='cd $-'
@@ -153,8 +188,10 @@ alias por='poetry run'
 alias popy='poetry run python'
 alias posip='poetry run ipython'
 alias posh='poetry run bash'
+alias vsh="source .venv/bin/activate"
 alias e_sh='exec $SHELL -l'
 alias duh='du -d 1 . -h | sort -h'
+alias cline_template='pipx run cookiecutter git@github.com:n-kats/cline_template.git'
 bindkey -v
 
 pyenv_poetry()
@@ -170,3 +207,6 @@ xopen()
 if [ -e "$HOME/.zshrc.local" ]; then
   source "$HOME/.zshrc.local"
 fi
+
+
+. "$HOME/.local/bin/env"
